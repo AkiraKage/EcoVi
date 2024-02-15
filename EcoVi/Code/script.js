@@ -4,7 +4,14 @@ const matrix = [];
 for (let i = 0; i < 5; i++) {
     matrix.push([]);
     for (let j = 0; j < 5; j++) {
-        matrix[i].push(Math.floor(Math.random() * 4));
+        let randomIndex;
+        do {
+            randomIndex = Math.floor(Math.random() * 4);
+        } while (
+            (i >= 2 && matrix[i - 1][j] === randomIndex && matrix[i - 2][j] === randomIndex) ||
+            (j >= 2 && matrix[i][j - 1] === randomIndex && matrix[i][j - 2] === randomIndex)
+        );
+        matrix[i].push(randomIndex);
     }
 }
 
