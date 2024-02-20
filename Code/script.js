@@ -1,4 +1,4 @@
-const images = ['./Img/bottle.png','./Img/box.png','./Img/plastic bottle.png','./Img/garbage_black.png']
+const images = ['./Img/bottle.png','./Img/box.png','./Img/plastic bottle.png','./Img/garbage_black.png'];
 
 const matrix = [];
 for (let i = 0; i < 5; i++) {
@@ -23,13 +23,39 @@ for (let i = 0; i < col; i++) {
     }
 }
 
-let icons = document.getElementsByClassName('cell')
-for(let i = 0; i < icons.length; i++){
-        icons[i].addEventListener("click", (e) => {
-            const clickedicon = e.currentTarget;
-            const row = clickedicon.getAttribute('i');
-            const col = clickedicon.getAttribute('j');
-            console.log(row, col);
-    })
-}
+let icons = document.getElementsByClassName('cell');
+let i1, j1, i2, j2
+for(let y = 0; y < icons.length; y++){
+        icons[y].addEventListener("click", () => {
+            const clickedicon = icons[y];
+            const i = clickedicon.getAttribute('i');
+            const j = clickedicon.getAttribute('j');
+            console.log(i, j);
 
+            if(i1 == undefined) {
+                i1 = i;
+                j1 = j;
+                console.log(i1,j1)
+                clickedicon.style.backgroundColor = 'lightblue';
+            } else if(i1 != i && j1 != j) {
+                i2 = i;
+                j2 = j;
+                clickedicon.style.backgroundColor = 'lightblue';
+
+                if((i1==i2 && j1==j2-1) || (i1==i2 && j1==j2+1) || (i1==i2-1 && j1==j2) || (i1==i2+1 && j1==j2)) {
+                    swap(i1,i2,j1,j2);
+                } else {
+                    alert("no");
+                }
+            }
+        })
+}
+function swap(i1,i2,j1,j2){
+    let temp = matrix[i1][j1];
+    matrix[i1][j1] = matrix[i2][j2];
+    matrix[i2][j2] = temp;
+    i1 = undefined;
+    i2 = i1;
+    j1 = i1;
+    j2 = i1;
+}
