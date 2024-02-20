@@ -19,6 +19,17 @@ let col = matrix.length
 document.getElementById("contenitore").style.gridTemplateColumns = `repeat(${col}, 1fr)`
 for (let i = 0; i < col; i++) {
     for(let j = 0; j < col; j++){
-        document.getElementById("contenitore").innerHTML += `<div class='card'><img src='${images[matrix[i][j]]}' ></div>`
+        document.getElementById("contenitore").innerHTML += `<div class='cell' i='${i}' j='${j}'><img src='${images[matrix[i][j]]}'></div>`
     }
 }
+
+let icons = document.getElementsByClassName('cell')
+for(let i = 0; i < icons.length; i++){
+        icons[i].addEventListener("click", (e) => {
+            const clickedicon = e.currentTarget;
+            const row = clickedicon.getAttribute('i');
+            const col = clickedicon.getAttribute('j');
+            console.log(row, col);
+    })
+}
+

@@ -3,7 +3,7 @@ img{
     height: 50px;
 }
 
-.card {
+.cell {
     border: 2px solid black;
     padding: 5px;
     margin: 5px;
@@ -16,23 +16,16 @@ img{
     text-align: center;
     background-color: lightslategrey;
     display: grid;
-    width: 600px;
+    width: 400px;
     margin-left: auto;
     margin-right: auto;
     border: 2px solid black;
     border-width: 5px;
 }
 
-th, td {
-    border: 1px solid black;
-    padding: 8px;
-}
-
 .centro{
 
     margin-left: 750px;
-
-
 
 }
 
