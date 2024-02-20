@@ -8,9 +8,9 @@ for (let i = 0; i < 5; i++) {
         do {
             randomIndex = Math.floor(Math.random() * 4);
         } while (
-            (i >= 2 && matrix[i - 1][j] === randomIndex && matrix[i - 2][j] === randomIndex) ||
-            (j >= 2 && matrix[i][j - 1] === randomIndex && matrix[i][j - 2] === randomIndex)
-        );
+            (i >= 2 && matrix[i - 1][j] == randomIndex && matrix[i - 2][j] == randomIndex) ||
+            (j >= 2 && matrix[i][j - 1] == randomIndex && matrix[i][j - 2] == randomIndex)
+        )
         matrix[i].push(randomIndex);
     }
 }
@@ -26,4 +26,15 @@ for (let i = 0; i < 5; i++) {
         row.appendChild(cell);
     }
     table.appendChild(row);
+}
+
+for(let i = 0; i < matrix.length; i++){
+    matrix[i].addEventListener("click", () => {
+        console.log(i, array[i])
+        matrix[i].innerHTML = array[i]
+})
+}
+
+function selectfn (i) {
+    console.log(i, matrix[i])
 }
