@@ -16,7 +16,7 @@ for (let i = 0; i < 5; i++) {
 }
 
 let col = matrix.length
-document.getElementById("contenitore").style.gridTemplateColumns = "repeat(" + col + ", 1fr)"
+document.getElementById("contenitore").style.gridTemplateColumns = `repeat(${col}, 1fr)`
 for (let i = 0; i < col; i++) {
     for(let j = 0; j < col; j++){
         document.getElementById("contenitore").innerHTML += `<div class='card'><img src='${images[matrix[i][j]]}' ></div>`
