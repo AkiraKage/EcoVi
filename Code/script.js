@@ -1,9 +1,13 @@
 const images = ['./Img/bottle.png','./Img/box.png','./Img/plastic bottle.png','./Img/garbage_black.png'];
 
+const parsedUrl = new URL(window.location.href);
+let col = parseInt(parsedUrl.searchParams.get('col'));
+
+
 const matrix = [];
-for (let i = 0; i < 5; i++) {
+for (let i = 0; i < col; i++) {
     matrix.push([]);
-    for (let j = 0; j < 5; j++) {
+    for (let j = 0; j < col; j++) {
         let randomIndex;
         do {
             randomIndex = Math.floor(Math.random() * 4);
@@ -15,7 +19,7 @@ for (let i = 0; i < 5; i++) {
     }
 }
 
-let col = matrix.length
+
 document.getElementById("contenitore").style.gridTemplateColumns = `repeat(${col}, 1fr)`
 for (let i = 0; i < col; i++) {
     for(let j = 0; j < col; j++){
