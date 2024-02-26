@@ -9,6 +9,7 @@
 body, html {
   height: 100%;
   margin: 0;
+  background-color: black;
 }
 
 .container {
@@ -23,8 +24,8 @@ body, html {
 }
 
 .play-button {
-  font-size: 24px;
-  padding: 15px 30px;
+  font-size: 32px;
+  padding: 30px 50px;
 }
 
 @keyframes slideDown {
@@ -37,24 +38,41 @@ body, html {
     opacity: 1;
   }
 }
+.distanzia{
+
+margin-top: 300px;
+
+
+}
+
+.centra1{
+
+ text-align: center;
+ font-size: 42px;
+ margin-top: 3px;
+ color: white;
+}
+
+
+
+
 
 
 </style>
 </head>
 <body>
+  <div class="centra1">
+<h1>IL GIOCO DEL RICICLO</h1>
+
+  </div>
+  <form action="index.html" method="get">
+    <div class="distanzia"></div>
    <div class="container">
     <div class="overlay"></div>
     <div class="button-container">
-      <button class="play-button" onclick="removeOverlay()">Gioca</button>
+      <input type="submit" class="play-button" onclick="removeOverlay()" value="Gioca">
     </div>
   </div>
-  <script>
-
-function removeOverlay() {
-  console.log('Pulsante cliccato!'); // Verifica se questo messaggio appare nella console
-  var overlay = document.querySelector('.overlay');
-  overlay.classList.add('hide');
-}
-  </script>
+ </form>
 </body>
 </html>
