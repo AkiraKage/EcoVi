@@ -42,28 +42,32 @@ for(let y = 0; y < icons.length; y++){
                 pos1 = `${i1} ${j1}`
                 console.log(pos1)
                 clickedicon.style.backgroundColor = 'lightblue';
-            } else if(i2 == undefined) {
+
+            } else if(i1 != undefined && i2 == undefined) {
                 pos2 = `${i} ${j}`
                 if(pos1 != pos2){
                     i2 = i;
                     j2 = j;
                     clickedicon.style.backgroundColor = 'lightblue';
-                }
 
-                /*if((i1==i2 && j1==j2-1) || (i1==i2 && j1==j2+1) || (i1==i2-1 && j1==j2) || (i1==i2+1 && j1==j2)) {
-                    swap(i1,i2,j1,j2);
-                } else {
-                    alert("no");
-                }*/
+                    if((i1 == i2 && Math.abs(j1 - j2) == 1) || (j1 == j2 && Math.abs(i1 - i2) == 1)) {
+                        swap(i1,i2,j1,j2);
+                    } else {
+                        alert("no");
+                    }
+                }
             }
         })
 }
+
 function swap(i1,i2,j1,j2){
     let temp = matrix[i1][j1];
     matrix[i1][j1] = matrix[i2][j2];
     matrix[i2][j2] = temp;
     i1 = undefined;
-    i2 = i1;
-    j1 = i1;
-    j2 = i1;
+    i2 = undefined;
+    j1 = undefined;
+    j2 = undefined;
+
+    return matrix, i1, i2, j1, j2;
 }
