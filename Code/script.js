@@ -52,6 +52,7 @@ for(let y = 0; y < icons.length; y++){
 
                     if((i1 == i2 && Math.abs(j1 - j2) == 1) || (j1 == j2 && Math.abs(i1 - i2) == 1)) {
                         swap(i1,i2,j1,j2);
+                        updateGrid();
                     } else {
                         alert("no");
                     }
@@ -70,4 +71,13 @@ function swap(i1,i2,j1,j2){
     j2 = undefined;
 
     return matrix, i1, i2, j1, j2;
+}
+
+function updateGrid() {
+    document.getElementById("contenitore").innerHTML = '';
+    for (let i = 0; i < col; i++) {
+        for(let j = 0; j < col; j++){
+            document.getElementById("contenitore").innerHTML += `<div class='cell' i='${i}' j='${j}'><img src='${images[matrix[i][j]]}'></div>`
+        }
+    }
 }
