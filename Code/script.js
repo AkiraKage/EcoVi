@@ -23,13 +23,14 @@ for (let i = 0; i < col; i++) {
     }
 }
 
+ 
 let icons = document.getElementsByClassName('cell')
 for(let i = 0; i < icons.length; i++){
         icons[i].addEventListener("click", (e) => {
             const clickedicon = e.currentTarget;
             const row = clickedicon.getAttribute('i');
             const col = clickedicon.getAttribute('j');
-            console.log(row, col);
+            console.log(row, col);           
     })
 }
 
