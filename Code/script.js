@@ -2,7 +2,7 @@ const images = ['./Img/bottle.png','./Img/box.png','./Img/plastic bottle.png','.
 
 const parsedUrl = new URL(window.location.href);
 let col = parseInt(parsedUrl.searchParams.get('col'));
-
+console.log("col: " + col);
 
 const matrix = [];
 for (let i = 0; i < col; i++) {
