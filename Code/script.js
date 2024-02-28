@@ -41,7 +41,6 @@ for(let y = 0; y < icons.length; y++){
                 j1 = j;
                 pos1 = `${i1} ${j1}`
                 click1 = y;
-                console.log(pos1)
                 clickedicon.style.backgroundColor = 'lightblue';
 
             } else if(i1 != undefined && i2 == undefined) {
