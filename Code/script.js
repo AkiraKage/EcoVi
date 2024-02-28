@@ -1,4 +1,4 @@
-const images = ['./Img/bottle.png','./Img/box.png','./Img/plastic bottle.png','./Img/garbage_black.png'];
+const images = ['./Img/bottle.png','./Img/box.png','./Img/plastic bottle.png','./Img/garbage.png'];
 
 const parsedUrl = new URL(window.location.href);
 let col = parseInt(parsedUrl.searchParams.get('col'));
