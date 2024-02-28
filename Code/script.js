@@ -9,12 +9,12 @@ for (let i = 0; i < col; i++) {
     matrix.push([]);
     for (let j = 0; j < col; j++) {
         let randomIndex;
-        while (
+        do {
+            randomIndex = Math.floor(Math.random() * 4);
+        } while (
             (i >= 2 && matrix[i - 1][j] == randomIndex && matrix[i - 2][j] == randomIndex) ||
             (j >= 2 && matrix[i][j - 1] == randomIndex && matrix[i][j - 2] == randomIndex)
-        ){
-            randomIndex = Math.floor(Math.random() * 4);
-        }
+        )
         matrix[i].push(randomIndex);
     }
 }
