@@ -52,8 +52,10 @@ for(let y = 0; y < icons.length; y++){
                     j2 = j;
                     if((i1 == i2 && Math.abs(j1 - j2) == 1) || (j1 == j2 && Math.abs(i1 - i2) == 1)) {
                         clickedicon.style.backgroundColor = 'lightblue';
-                        swap(i1,i2,j1,j2);
-                        updateGrid();
+                        setTimeout(()=>{
+                            swap(i1,i2,j1,j2);
+                            updateGrid();
+                        }, 350);
                     } else {
                         alert("no");
                         i2 = undefined;
