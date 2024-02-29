@@ -4,7 +4,7 @@ const parsedUrl = new URL(window.location.href);
 let col = parseInt(parsedUrl.searchParams.get('col'));
 console.log("col: " + col);
 
-const matrix = [];
+var matrix = [];
 for (let i = 0; i < col; i++) {
     matrix.push([]);
     for (let j = 0; j < col; j++) {
@@ -149,13 +149,11 @@ function controllo(){
             }
         }
     }
-    updateGrid()
-    
+
     console.log(tris)
+    updateGrid();
+    return matrix;
 }
-
-
-console.log(tris)
 
 
 
