@@ -29,7 +29,10 @@ for (let i = 0; i < col; i++) {
 
 let icons = document.getElementsByClassName('cell');
 let i1, j1, pos1, i2, j2, pos2, click1, click2
-for(let y = 0; y < icons.length; y++){
+clickcheck();
+
+function clickcheck(){
+    for(let y = 0; y < icons.length; y++){
         icons[y].addEventListener("click", () => {
             const clickedicon = icons[y];
             const i = clickedicon.getAttribute('i');
@@ -54,26 +57,29 @@ for(let y = 0; y < icons.length; y++){
                         setTimeout(()=>{
                             swap(i1,i2,j1,j2);
                             updateGrid();
+                            i1 = undefined;
+                            i2 = undefined;
+                            j1 = undefined;
+                            j2 = undefined;
                         }, 350);
                     } else {
                         alert("no");
+                        i1 = undefined;
+                        i2 = undefined;
                         i2 = undefined;
                         j2 = undefined;
+                        updateGrid();
                     }
                 }
             }
         })
+    }
 }
 
 function swap(i1,i2,j1,j2){
     let temp = matrix[i1][j1];
     matrix[i1][j1] = matrix[i2][j2];
     matrix[i2][j2] = temp;
-    i1 = undefined;
-    i2 = undefined;
-    j1 = undefined;
-    j2 = undefined;
-
     return matrix, i1, i2, j1, j2;
 }
 
@@ -82,6 +88,7 @@ function updateGrid() {
     for (let i = 0; i < col; i++) {
         for(let j = 0; j < col; j++){
             document.getElementById("contenitore").innerHTML += `<div class='cell' i='${i}' j='${j}'><img src='${images[matrix[i][j]]}'></div>`
+            clickcheck();
         }
     }
 }
