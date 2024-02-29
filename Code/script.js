@@ -57,15 +57,12 @@ function clickcheck() {
                         clickedicon.style.backgroundColor = 'lightblue';
                         setTimeout(() => {
                             swap(i1, i2, j1, j2);
-                            updateGrid();
                             i1 = undefined;
                             i2 = undefined;
                             j1 = undefined;
                             j2 = undefined;
                             controllo();
-                            console.log(tris)
-                            tris = 0
-
+                            updateGrid();
                         }, 350);
                     } else {
                         alert("no");
@@ -97,86 +94,72 @@ function updateGrid() {
         }
     }
 }
-let tris = 0
-let quad = 0
-let cinquina = 0
+let tris = 0;
+let quad = 0;
+let cinquina = 0;
+let found = false;
 function controllo() {
     for (let i = 0; i < col; i++) {
         for (let j = 0; j < col; j++) {
-            // Controlla le sequenze orizzontali
-            if (j <= 2 && matrix[i][j] == matrix[i][j + 1] && matrix[i][j] == matrix[i][j + 2]) {
-                if (matrix[i][j + 3] != undefined) {
-                    if (matrix[i][j + 3] == matrix[i][j + 2]) {
-                        if (matrix[i][j + 3] == matrix[i][j + 4]) {
-
-                            matrix[i][j] = undefined
-                            matrix[i][j + 1] = undefined
-                            matrix[i][j + 2] = undefined
-                            matrix[i][j + 3] = undefined
-                            matrix[i][j + 4] = undefined
-                            cinquina += 1
-
-                        } else {
-                            quad += 1;
-                            matrix[i][j] = undefined
-                            matrix[i][j + 1] = undefined
-                            matrix[i][j + 2] = undefined
-                            matrix[i][j + 3] = undefined
-                        }
+            // controllo sequenze orizzontali
+            if (j >= 2 && matrix[i][j] == matrix[i][j - 1] && matrix[i][j] == matrix[i][j - 2]) {
+                if (matrix[i][j + 1] == matrix[i][j]) {
+                    if (matrix[i][j + 2] == matrix[i][j]) {
+                        cinquina += 1;
+                        found = true;
+                        matrix[i][j] = undefined;
+                        matrix[i][j - 1] = undefined;
+                        matrix[i][j - 2] = undefined;
+                        matrix[i][j + 1] = undefined;
+                        matrix[i][j + 2] = undefined;
                     } else {
-                        tris += 1;
-                        matrix[i][j] = undefined
-                        matrix[i][j + 1] = undefined
-                        matrix[i][j + 2] = undefined
+                        quad += 1;
+                        found = true;
+                        matrix[i][j] = undefined;
+                        matrix[i][j - 1] = undefined;
+                        matrix[i][j - 2] = undefined;
+                        matrix[i][j + 1] = undefined;
                     }
                 } else {
                     tris += 1;
-                    matrix[i][j] = undefined
-                    matrix[i][j + 1] = undefined
-                    matrix[i][j + 2] = undefined
+                    found = true;
+                    matrix[i][j] = undefined;
+                    matrix[i][j - 1] = undefined;
+                    matrix[i][j - 2] = undefined;
                 }
             }
-            // Controlla le sequenze verticali
-            if (i <= 2 && matrix[i][j] == matrix[i + 1][j] && matrix[i][j] == matrix[i + 2][j]) {
 
-                if (matrix[i + 3][j] != undefined) {
-                    if (matrix[i + 3][j] == matrix[i + 2][j]) {
-                        if (matrix[i][j + 3] == matrix[i][j + 4]) {
+            // controllo sequenze verticali
+            if (i >= 2 && matrix[i][j] == matrix[i - 1][j] && matrix[i][j] == matrix[i - 2][j]) {
+                if (matrix[i + 1][j] == matrix[i][j]) {
+                    if (matrix[i + 2][j] == matrix[i][j]) {
+                        cinquina += 1;
+                        found = true;
+                        matrix[i][j] = undefined;
+                        matrix[i - 1][j] = undefined;
+                        matrix[i - 2][j] = undefined;
+                        matrix[i + 1][j] = undefined;
+                        matrix[i + 2][j] = undefined;
 
-                            matrix[i][j] = undefined
-                            matrix[i][j + 1] = undefined
-                            matrix[i][j + 2] = undefined
-                            matrix[i][j + 3] = undefined
-                            matrix[i][j + 4] = undefined
-                            cinquina += 1
-
-                        }
                     } else {
                         quad += 1;
-                        matrix[i][j] = undefined
-                        matrix[i][j + 1] = undefined
-                        matrix[i][j + 2] = undefined
-                        matrix[i][j + 3] = undefined
+                        found = true;
+                        matrix[i][j] = undefined;
+                        matrix[i - 1][j] = undefined;
+                        matrix[i - 2][j] = undefined;
+                        matrix[i + 1][j] = undefined;
 
-                    } /*else {
-                        tris += 1;
-                        matrix[i][j] = undefined
-                        matrix[i+1][j] = undefined
-                        matrix[i+2][j] = undefined
-                    }  */
+                    }
                 } else {
                     tris += 1;
-                    matrix[i][j] = undefined
-                    matrix[i + 1][j] = undefined
-                    matrix[i + 2][j] = undefined
+                    found = true;
+                    matrix[i][j] = undefined;
+                    matrix[i - 1][j] = undefined;
+                    matrix[i - 2][j] = undefined;
                 }
             }
         }
     }
-    updateGrid()
-
-    console.log(tris)
+    console.log('found: ' + found);
+    return found;
 }
-
-
-console.log(tris)
