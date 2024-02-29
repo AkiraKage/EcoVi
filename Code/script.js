@@ -38,6 +38,7 @@ function clickcheck(){
             const i = clickedicon.getAttribute('i');
             const j = clickedicon.getAttribute('j');
             console.log(i, j);
+            
 
             if(i1 == undefined) {
                 i1 = i;
@@ -61,6 +62,10 @@ function clickcheck(){
                             i2 = undefined;
                             j1 = undefined;
                             j2 = undefined;
+                            controllo();
+                            console.log(tris)
+                            tris = 0
+                            
                         }, 350);
                     } else {
                         alert("no");
@@ -92,3 +97,66 @@ function updateGrid() {
         }
     }
 }
+let tris =0
+let quad = 0
+function controllo(){
+    for (let i = 0; i<col; i++ ) {
+        for (let j = 0; j<col; j++) {
+            // Controlla le sequenze orizzontali
+            if (j <= 2 && matrix[i][j] == matrix[i][j+1] && matrix[i][j] == matrix[i][j+2]) {
+                if(matrix[i][j+3] != undefined){
+                    if(matrix[i][j+3] == matrix[i][j+2]){
+                        quad += 1;
+                        matrix[i][j] = undefined
+                        matrix[i][j+1] = undefined
+                        matrix[i][j+2] = undefined
+                        matrix[i][j+3] = undefined
+                    } else {
+                        tris += 1;
+                        matrix[i][j] = undefined
+                        matrix[i][j+1] = undefined
+                        matrix[i][j+2] = undefined
+                    }
+                } else {
+                    tris += 1;
+                    matrix[i][j] = undefined
+                    matrix[i][j+1] = undefined
+                    matrix[i][j+2] = undefined
+                }
+            }
+            // Controlla le sequenze verticali
+            if (i <= 2 && matrix[i][j] == matrix[i+1][j] && matrix[i][j] == matrix[i+2][j]) {
+                if(matrix[i+3][j] != undefined){
+                    if(matrix[i+3][j] == matrix[i+2][j]){
+                        quad += 1;
+                        matrix[i][j] = undefined
+                        matrix[i][j+1] = undefined
+                        matrix[i][j+2] = undefined
+                        matrix[i][j+3] = undefined
+
+                    } else {
+                        tris += 1;
+                        matrix[i][j] = undefined
+                        matrix[i+1][j] = undefined
+                        matrix[i+2][j] = undefined
+                    }  
+                } else {
+                    tris += 1;
+                    matrix[i][j] = undefined
+                    matrix[i+1][j] = undefined
+                    matrix[i+2][j] = undefined
+                }
+            }
+        }
+    }
+    updateGrid()
+    
+    console.log(tris)
+}
+
+
+console.log(tris)
+
+
+
+
