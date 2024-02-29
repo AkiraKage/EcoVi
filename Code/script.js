@@ -4,7 +4,7 @@ const parsedUrl = new URL(window.location.href);
 let col = parseInt(parsedUrl.searchParams.get('col'));
 console.log("col: " + col);
 
-var matrix = [];
+const matrix = [];
 for (let i = 0; i < col; i++) {
     matrix.push([]);
     for (let j = 0; j < col; j++) {
@@ -99,19 +99,34 @@ function updateGrid() {
 }
 let tris =0
 let quad = 0
+let cinquina = 0
 function controllo(){
     for (let i = 0; i<col; i++ ) {
         for (let j = 0; j<col; j++) {
             // Controlla le sequenze orizzontali
             if (j <= 2 && matrix[i][j] == matrix[i][j+1] && matrix[i][j] == matrix[i][j+2]) {
-                if(matrix[i][j+3] != undefined){
+
+               
+                   
+
+                    
+                     if(matrix[i][j+3] != undefined){
                     if(matrix[i][j+3] == matrix[i][j+2]){
-                        quad += 1;
+                        if(matrix[i][j+3] == matrix[i][j+4]){
+
+                    matrix[i][j] = undefined
+                    matrix[i][j+1] = undefined
+                    matrix[i][j+2] = undefined
+                    matrix[i][j+3] = undefined
+                    matrix[i][j+4] = undefined
+                    cinquina += 1
+
+                        }else{quad += 1;
                         matrix[i][j] = undefined
                         matrix[i][j+1] = undefined
                         matrix[i][j+2] = undefined
                         matrix[i][j+3] = undefined
-                    } else {
+                    }} else {
                         tris += 1;
                         matrix[i][j] = undefined
                         matrix[i][j+1] = undefined
@@ -126,20 +141,30 @@ function controllo(){
             }
             // Controlla le sequenze verticali
             if (i <= 2 && matrix[i][j] == matrix[i+1][j] && matrix[i][j] == matrix[i+2][j]) {
-                if(matrix[i+3][j] != undefined){
+
+                 if(matrix[i+3][j] != undefined){
                     if(matrix[i+3][j] == matrix[i+2][j]){
-                        quad += 1;
+                        if(matrix[i][j+3] == matrix[i][j+4]){
+
+                            matrix[i][j] = undefined
+                            matrix[i][j+1] = undefined
+                            matrix[i][j+2] = undefined
+                            matrix[i][j+3] = undefined
+                            matrix[i][j+4] = undefined
+                            cinquina += 1
+        
+                                }}else{quad += 1;
                         matrix[i][j] = undefined
                         matrix[i][j+1] = undefined
                         matrix[i][j+2] = undefined
                         matrix[i][j+3] = undefined
 
-                    } else {
+                    } /*else {
                         tris += 1;
                         matrix[i][j] = undefined
                         matrix[i+1][j] = undefined
                         matrix[i+2][j] = undefined
-                    }  
+                    }  */
                 } else {
                     tris += 1;
                     matrix[i][j] = undefined
@@ -149,12 +174,10 @@ function controllo(){
             }
         }
     }
-
+    updateGrid()
+    
     console.log(tris)
-    updateGrid();
-    return matrix;
 }
 
 
-
-
+console.log(tris)
