@@ -4,21 +4,26 @@ const parsedUrl = new URL(window.location.href);
 let col = parseInt(parsedUrl.searchParams.get('col'));
 console.log("col: " + col);
 
-const matrix = [];
-for (let i = 0; i < col; i++) {
-    matrix.push([]);
-    for (let j = 0; j < col; j++) {
-        let randomIndex;
-        do {
-            randomIndex = Math.floor(Math.random() * 4);
-        } while (
-            (i >= 2 && matrix[i - 1][j] == randomIndex && matrix[i - 2][j] == randomIndex) ||
-            (j >= 2 && matrix[i][j - 1] == randomIndex && matrix[i][j - 2] == randomIndex)
-        )
-        matrix[i].push(randomIndex);
+let matrix;
+let storedmatrix = localStorage.getItem('matrix');
+if(storedmatrix){
+    matrix = JSON.parse(storedmatrix);
+} else {     
+    matrix = [];
+    for (let i = 0; i < col; i++) {
+        matrix.push([]);
+        for (let j = 0; j < col; j++) {
+            let randomIndex;
+            do {
+                randomIndex = Math.floor(Math.random() * 4);
+            } while (
+                (i >= 2 && matrix[i - 1][j] == randomIndex && matrix[i - 2][j] == randomIndex) ||
+                (j >= 2 && matrix[i][j - 1] == randomIndex && matrix[i][j - 2] == randomIndex)
+            )
+            matrix[i].push(randomIndex);
+        }
     }
 }
-
 
 document.getElementById("contenitore").style.gridTemplateColumns = `repeat(${col}, 1fr)`
 for (let i = 0; i < col; i++) {
@@ -26,6 +31,8 @@ for (let i = 0; i < col; i++) {
         document.getElementById("contenitore").innerHTML += `<div class='cell' i='${i}' j='${j}'><img src='${images[matrix[i][j]]}'></div>`
     }
 }
+
+localStorage.setItem('matrix', JSON.stringify(matrix));
 
 let icons = document.getElementsByClassName('cell');
 let i1, j1, pos1, i2, j2, pos2, click1, click2
@@ -63,7 +70,9 @@ function clickcheck() {
                             j2 = undefined;
                             controllo();
                             updateGrid();
+                            localStorage.setItem('matrix', JSON.stringify(matrix));
                         }, 350);
+                        
                     } else {
                         alert("no");
                         i1 = undefined;
