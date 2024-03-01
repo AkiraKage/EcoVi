@@ -6,9 +6,9 @@ console.log("col: " + col);
 
 let matrix;
 let storedmatrix = localStorage.getItem('matrix');
-if(storedmatrix){
-    matrix = JSON.parse(storedmatrix);
-} else {     
+//if(storedmatrix){
+//    matrix = JSON.parse(storedmatrix);
+//} else {     
     matrix = [];
     for (let i = 0; i < col; i++) {
         matrix.push([]);
@@ -23,7 +23,7 @@ if(storedmatrix){
             matrix[i].push(randomIndex);
         }
     }
-}
+//}
 
 document.getElementById("contenitore").style.gridTemplateColumns = `repeat(${col}, 1fr)`
 for (let i = 0; i < col; i++) {
@@ -32,7 +32,7 @@ for (let i = 0; i < col; i++) {
     }
 }
 
-localStorage.setItem('matrix', JSON.stringify(matrix));
+//localStorage.setItem('matrix', JSON.stringify(matrix));
 
 let icons = document.getElementsByClassName('cell');
 let i1, j1, pos1, i2, j2, pos2, click1, click2
@@ -70,7 +70,7 @@ function clickcheck() {
                             j2 = undefined;
                             controllo();
                             updateGrid();
-                            localStorage.setItem('matrix', JSON.stringify(matrix));
+                            //localStorage.setItem('matrix', JSON.stringify(matrix));
                         }, 350);
                         
                     } else {
