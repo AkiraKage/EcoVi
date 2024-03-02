@@ -9,20 +9,20 @@ let storedmatrix = localStorage.getItem('matrix');
 //if(storedmatrix){
 //    matrix = JSON.parse(storedmatrix);
 //} else {     
-    matrix = [];
-    for (let i = 0; i < col; i++) {
-        matrix.push([]);
-        for (let j = 0; j < col; j++) {
-            let randomIndex;
-            do {
-                randomIndex = Math.floor(Math.random() * 4);
-            } while (
-                (i >= 2 && matrix[i - 1][j] == randomIndex && matrix[i - 2][j] == randomIndex) ||
-                (j >= 2 && matrix[i][j - 1] == randomIndex && matrix[i][j - 2] == randomIndex)
-            )
-            matrix[i].push(randomIndex);
-        }
+matrix = [];
+for (let i = 0; i < col; i++) {
+    matrix.push([]);
+    for (let j = 0; j < col; j++) {
+        let randomIndex;
+        do {
+            randomIndex = Math.floor(Math.random() * 4);
+        } while (
+            (i >= 2 && matrix[i - 1][j] == randomIndex && matrix[i - 2][j] == randomIndex) ||
+            (j >= 2 && matrix[i][j - 1] == randomIndex && matrix[i][j - 2] == randomIndex)
+        )
+        matrix[i].push(randomIndex);
     }
+}
 //}
 
 document.getElementById("contenitore").style.gridTemplateColumns = `repeat(${col}, 1fr)`
@@ -35,7 +35,7 @@ for (let i = 0; i < col; i++) {
 //localStorage.setItem('matrix', JSON.stringify(matrix));
 
 let icons = document.getElementsByClassName('cell');
-let i1, j1, pos1, i2, j2, pos2, click1, click2
+let i1, j1, pos1, i2, j2, pos2, click1, click2;
 clickcheck();
 
 function clickcheck() {
@@ -72,7 +72,6 @@ function clickcheck() {
                             updateGrid();
                             //localStorage.setItem('matrix', JSON.stringify(matrix));
                         }, 350);
-                        
                     } else {
                         alert("no");
                         i1 = undefined;
@@ -98,11 +97,22 @@ function updateGrid() {
     document.getElementById("contenitore").innerHTML = '';
     for (let i = 0; i < col; i++) {
         for (let j = 0; j < col; j++) {
+            if (matrix[i][j] == undefined) {
+                let randomIndex;
+                do {
+                    randomIndex = Math.floor(Math.random() * 4);
+                } while (
+                    (i >= 2 && matrix[i - 1][j] == randomIndex && matrix[i - 2][j] == randomIndex) ||
+                    (j >= 2 && matrix[i][j - 1] == randomIndex && matrix[i][j - 2] == randomIndex)
+                )
+                matrix[i][j] = randomIndex;
+            }
             document.getElementById("contenitore").innerHTML += `<div class='cell' i='${i}' j='${j}'><img src='${images[matrix[i][j]]}'></div>`
-            clickcheck();
         }
+        clickcheck();
     }
 }
+
 let tris = 0;
 let quad = 0;
 let cinquina = 0;
@@ -111,9 +121,9 @@ function controllo() {
     for (let i = 0; i < col; i++) {
         for (let j = 0; j < col; j++) {
             // controllo sequenze orizzontali
-            if (j >= 2 && matrix[i][j] == matrix[i][j - 1] && matrix[i][j] == matrix[i][j - 2]) {
-                if (j <= col-2 && matrix[i][j + 1] == matrix[i][j]) {
-                    if (j <= col-3 && matrix[i][j + 2] == matrix[i][j]) {
+            if (j >= 2 && matrix[i][j] != undefined && matrix[i][j] == matrix[i][j - 1] && matrix[i][j] == matrix[i][j - 2]) {
+                if (j <= col - 2 && matrix[i][j + 1] == matrix[i][j]) {
+                    if (j <= col - 3 && matrix[i][j + 2] == matrix[i][j]) {
                         cinquina += 1;
                         found = true;
                         matrix[i][j] = undefined;
@@ -139,9 +149,9 @@ function controllo() {
             }
 
             // controllo sequenze verticali
-            if (i >= 2 && matrix[i][j] == matrix[i - 1][j] && matrix[i][j] == matrix[i - 2][j]) {
-                if (i <= col-2 && matrix[i + 1][j] == matrix[i][j]) {
-                    if (i <= col-3 && matrix[i + 2][j] == matrix[i][j]) {
+            if (i >= 2 && matrix[i][j] != undefined && matrix[i][j] == matrix[i - 1][j] && matrix[i][j] == matrix[i - 2][j]) {
+                if (i <= col - 2 && matrix[i + 1][j] == matrix[i][j]) {
+                    if (i <= col - 3 && matrix[i + 2][j] == matrix[i][j]) {
                         cinquina += 1;
                         found = true;
                         matrix[i][j] = undefined;
@@ -169,6 +179,23 @@ function controllo() {
             }
         }
     }
+    //aggiornamento matrice per spostare valori undefined in cima
     console.log('found: ' + found);
-    return found;
+    if(found == true){
+        found = false;
+        for(let i = 0; i < col; i++){
+            for(let j = 0; j < col; j++){
+                if(matrix[i][j] == undefined){
+                    let n = i;
+                    while(n > 0){
+                        swap(n, n - 1, j, j)
+                        n--;
+                    }
+                }
+            }
+        }
+        controllo();
+    } else {
+        return found;
+    }
 }
