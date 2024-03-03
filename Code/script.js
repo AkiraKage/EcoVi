@@ -124,6 +124,7 @@ let somma4 = 0
 let somma5 = 0
 let somma6 = 0
 let somma7 = 0
+let count = 0
 
 
 let found = false;
@@ -132,6 +133,7 @@ function controllo() {
         for (let j = 0; j < col; j++) {
             // controllo sequenze orizzontali
             if (j >= 2 && matrix[i][j] != undefined && matrix[i][j] == matrix[i][j - 1] && matrix[i][j] == matrix[i][j - 2]) {
+                count += 1
                 if (j <= col - 2 && matrix[i][j + 1] == matrix[i][j]) {
                     if (j <= col - 3 && matrix[i][j + 2] == matrix[i][j]) {
                         if(matrix[i][j] == 0){
@@ -224,6 +226,7 @@ function controllo() {
 
             // controllo sequenze verticali
             if (i >= 2 && matrix[i][j] != undefined && matrix[i][j] == matrix[i - 1][j] && matrix[i][j] == matrix[i - 2][j]) {
+                count += 1
                 if (i <= col - 2 && matrix[i + 1][j] == matrix[i][j]) {
                     if (i <= col - 3 && matrix[i + 2][j] == matrix[i][j]) {
                         if(matrix[i][j] == 0){
@@ -330,13 +333,20 @@ function controllo() {
 
                     }
                 }
-                controllo();
             }
         }
         controllo();
     } else {
         return found;
     }
+    if(count>=1){
+        count = 0
+        controllo();
+        
+
+    }
+
+
 }
 
 console.log(matrix[0][0])
