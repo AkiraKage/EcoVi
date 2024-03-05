@@ -123,10 +123,11 @@ function updateGrid() {
 let tris = 0;
 let quad = 0;
 let cinquina = 0;
-/*let somma0 = 0
-let somma1 = 0
-let somma2 = 0
-let somma3 = 0*/
+let points = 0
+let somma4 = 0
+let somma5 = 0
+let somma6 = 0
+let somma7 = 0
 let papercount = 0
 let glasscount = 0
 let drycount = 0
@@ -146,27 +147,41 @@ function controllo() {
             if (j >= 2 && matrix[i][j] != null && matrix[i][j] == matrix[i][j - 1] && matrix[i][j] == matrix[i][j - 2]) {
                 if (j <= col - 2 && matrix[i][j + 1] == matrix[i][j]) {
                     if (j <= col - 3 && matrix[i][j + 2] == matrix[i][j]) {
-                        /*if(matrix[i][j] == 0){
-                            somma0 += 25
+                        if(matrix[i][j] == 0){
+                            
+                            points += 25
                             somma4 += 5
+                            if(somma4>=50){
+                                somma4=50
+                            }
+                            
                             document.getElementById("p5").innerHTML = "Bottiglie di vetro per vincere : " + somma4 + "/50" 
-                        document.getElementById("p1").innerHTML = "Punteggio bottiglie di vetro : " + somma0;
+                        document.getElementById("p4").innerHTML = "Punteggio totale : " + points;
                         }else if(matrix[i][j] == 1){
-                            somma1 += 10
+                            points += 10
                             somma5 += 5
+                            if(somma5>=50){
+                                somma5=50
+                            }
                             document.getElementById("p6").innerHTML = "Scatole di cartone per vincere : " + somma5 + "/50"
-                        document.getElementById("p2").innerHTML = "Punteggio scatole di cartone : " + somma1;
+                            document.getElementById("p4").innerHTML = "Punteggio totale : " + points;
                         }else if(matrix[i][j] == 2){
-                            somma2 += 15
+                            points += 15
                             somma6 += 5
+                            if(somma6>=50){
+                                somma6=50
+                            }
                             document.getElementById("p7").innerHTML = "Bottiglie di plastica per vincere : " + somma6 + "/50"
-                        document.getElementById("p3").innerHTML = "Punteggio bottiglie di plastica : " + somma2;
+                            document.getElementById("p4").innerHTML = "Punteggio totale : " + points;
                         }else if(matrix[i][j] == 3){
-                            somma3 += 5
+                            points += 5
                             somma7 += 5
+                            if(somma7>=50){
+                                somma7=50
+                            }
                             document.getElementById("p8").innerHTML = "Sacchetti spazzatura per vincere : " + somma7 + "/50"
-                        document.getElementById("p4").innerHTML = "Punteggio sacchetti spazzatura : " + somma3;
-                        }*/
+                            document.getElementById("p4").innerHTML = "Punteggio totale : " + points;
+                        }
                         comboX = cinquina;
                         found = true;
                         target = matrix[i][j];
@@ -176,28 +191,40 @@ function controllo() {
                         matrix[i][j + 1] = null;
                         matrix[i][j + 2] = null;
                     } else {
-                        /*if(matrix[i][j] == 0){
-                            somma0 += 20
+                        if(matrix[i][j] == 0){
+                            points += 20
                             somma4 += 4
+                            if(somma4>=50){
+                                somma4=50
+                            }
                             document.getElementById("p5").innerHTML = "Bottiglie di vetro per vincere : " + somma4 + "/50"
-                        document.getElementById("p1").innerHTML = "Punteggio bottiglie di vetro : " + somma0;
+                            document.getElementById("p4").innerHTML = "Punteggio totale : " + points;
                         }else if(matrix[i][j] == 1){
-                            somma1 += 8 
+                            points += 8 
                             somma5 += 4
+                            if(somma5>=50){
+                                somma5=50
+                            }
                             document.getElementById("p6").innerHTML = "Scatole di cartone per vincere : " + somma5 + "/50"
-                        document.getElementById("p2").innerHTML = "Punteggio scatole di cartone : " + somma1;
+                            document.getElementById("p4").innerHTML = "Punteggio totale : " + points;
                         }else if(matrix[i][j] == 2){
-                            somma2 += 12
+                            points += 12
                             somma6 += 4
+                            if(somma6>=50){
+                                somma6=50
+                            }
                             document.getElementById("p7").innerHTML = "Bottiglie di plastica per vincere : " + somma6 + "/50"
-                        document.getElementById("p3").innerHTML = "Punteggio bottiglie di plastica : " + somma2;
+                            document.getElementById("p4").innerHTML = "Punteggio totale : " + points;
                         }else if(matrix[i][j] == 3){
-                            somma3 += 4
+                            points += 4
                             somma7 += 4
+                            if(somma7>=50){
+                                somma7=50
+                            }
                             document.getElementById("p8").innerHTML = "Sacchetti spazzatura per vincere : " + somma7 + "/50"
-                        document.getElementById("p4").innerHTML = "Punteggio sacchetti spazzatura : " + somma3;
+                            document.getElementById("p4").innerHTML = "Punteggio totale : " + points;
                         }
-                        */
+                        
                         comboX = quad;
                         found = true;
                         target = matrix[i][j];
@@ -207,27 +234,39 @@ function controllo() {
                         matrix[i][j + 1] = null;
                     }
                 } else {
-                    /*if(matrix[i][j] == 0){
-                        somma0 += 15
+                    if(matrix[i][j] == 0){
+                        points += 15
                         somma4 += 3
+                        if(somma4>=50){
+                            somma4=50
+                        }
                             document.getElementById("p5").innerHTML = "Bottiglie di vetro per vincere : " + somma4 + "/50"
-                    document.getElementById("p1").innerHTML = "Punteggio bottiglie di vetro : " + somma0;
+                            document.getElementById("p4").innerHTML = "Punteggio totale : " + points;
                     }else if(matrix[i][j] == 1){
-                        somma1 += 6
+                        points += 6
                         somma5 += 3
+                        if(somma5>=50){
+                            somma5=50
+                        }
                             document.getElementById("p6").innerHTML = "Scatole di cartone per vincere : " + somma5 + "/50"
-                    document.getElementById("p2").innerHTML = "Punteggio scatole di cartone : " + somma1;
+                            document.getElementById("p4").innerHTML = "Punteggio totale : " + points;
                     }else if(matrix[i][j] == 2){
-                        somma2 += 9
+                        points += 9
                         somma6 += 3
+                        if(somma6>=50){
+                            somma6=50
+                        }
                             document.getElementById("p7").innerHTML = "Bottiglie di plastica per vincere : " + somma6 + "/50"
-                    document.getElementById("p3").innerHTML = "Punteggio bottiglie di plastica : " + somma2;
+                            document.getElementById("p4").innerHTML = "Punteggio totale : " + points;
                     }else if(matrix[i][j] == 3){
-                        somma3 += 3
+                        points += 3
                         somma7 += 3
+                        if(somma7>=50){
+                            somma7=50
+                        }
                             document.getElementById("p8").innerHTML = "Sacchetti spazzatura per vincere : " + somma7 + "/50"
-                    document.getElementById("p4").innerHTML = "Punteggio sacchetti spazzatura : " + somma3;
-                    }*/
+                            document.getElementById("p4").innerHTML = "Punteggio totale : " + points;
+                    }
                     comboX = tris;
                     found = true;
                     target = matrix[i][j];
@@ -241,27 +280,39 @@ function controllo() {
             if (i >= 2 && matrix[i][j] != null && matrix[i][j] == matrix[i - 1][j] && matrix[i][j] == matrix[i - 2][j]) {
                 if (i <= col - 2 && matrix[i + 1][j] == matrix[i][j]) {
                     if (i <= col - 3 && matrix[i + 2][j] == matrix[i][j]) {
-                        /*if(matrix[i][j] == 0){
-                            somma0 += 25
+                        if(matrix[i][j] == 0){
+                            points += 25
                             somma4 += 5
+                            if(somma4>=50){
+                                somma4=50
+                            }
                             document.getElementById("p5").innerHTML = "Bottiglie di vetro per vincere : " + somma4 + "/50"
-                        document.getElementById("p1").innerHTML = "Punteggio bottiglie di vetro : " + somma0;
+                            document.getElementById("p4").innerHTML = "Punteggio totale : " + points;
                         }else if(matrix[i][j] == 1){
-                            somma1 += 10
+                            points += 10
                             somma5 += 5
+                            if(somma5>=50){
+                                somma5=50
+                            }
                             document.getElementById("p6").innerHTML = "Scatole di cartone per vincere : " + somma5 + "/50" 
-                        document.getElementById("p2").innerHTML = "Punteggio scatole di cartone : " + somma1;
+                            document.getElementById("p4").innerHTML = "Punteggio totale : " + points;
                         }else if(matrix[i][j] == 2){
-                            somma2 += 15
+                            points += 15
                             somma6 += 5
+                            if(somma6>=50){
+                                somma6=50
+                            }
                             document.getElementById("p7").innerHTML = "Bottiglie di plastica per vincere : " + somma6 + "/50"
-                        document.getElementById("p3").innerHTML = "Punteggio bottiglie di plastica : " + somma2;
+                            document.getElementById("p4").innerHTML = "Punteggio totale : " + points;
                         }else if(matrix[i][j] == 3){
-                            somma3 += 5
+                            points += 5
                             somma7 += 5
+                            if(somma7>=50){
+                                somma7=50
+                            }
                             document.getElementById("p8").innerHTML = "Sacchetti spazzatura per vincere : " + somma7 + "/50"
-                        document.getElementById("p4").innerHTML = "Punteggio sacchetti spazzatura : " + somma3;
-                        }*/
+                            document.getElementById("p4").innerHTML = "Punteggio totale : " + points;
+                        }
                         comboY = cinquina;
                         found = true;
                         target = matrix[i][j];
@@ -272,27 +323,39 @@ function controllo() {
                         matrix[i + 2][j] = null;
 
                     } else {
-                        /*if(matrix[i][j] == 0){
-                            somma0 += 20
+                        if(matrix[i][j] == 0){
+                            points += 20
                             somma4 += 4
+                            if(somma4>=50){
+                                somma4=50
+                            }
                             document.getElementById("p5").innerHTML = "Bottiglie di vetro per vincere : " + somma4 + "/50"
-                        document.getElementById("p1").innerHTML = "Punteggio bottiglie di vetro : " + somma0;
+                            document.getElementById("p4").innerHTML = "Punteggio totale : " + points;
                         }else if(matrix[i][j] == 1){
-                            somma1 += 8
+                            points += 8
                             somma5 += 4
+                            if(somma5>=50){
+                                somma5=50
+                            }
                             document.getElementById("p6").innerHTML = "Scatole di cartone per vincere : " + somma5 + "/50" 
-                        document.getElementById("p2").innerHTML = "Punteggio scatole di cartone : " + somma1;
+                            document.getElementById("p4").innerHTML = "Punteggio totale : " + points;
                         }else if(matrix[i][j] == 2){
-                            somma2 += 12
+                            points += 12
                             somma6 += 4
+                            if(somma6>=50){
+                                somma6=50
+                            }
                             document.getElementById("p7").innerHTML = "Bottiglie di plastica per vincere : " + somma6 + "/50"
-                        document.getElementById("p3").innerHTML = "Punteggio bottiglie di plastica : " + somma2;
+                            document.getElementById("p4").innerHTML = "Punteggio totale : " + points;
                         }else if(matrix[i][j] == 3){
-                            somma3 += 4
+                            points += 4
                             somma7 += 4
+                            if(somma7>=50){
+                                somma7=50
+                            }
                             document.getElementById("p8").innerHTML = "Sacchetti spazzatura per vincere : " + somma7 + "/50"
-                        document.getElementById("p4").innerHTML = "Punteggio sacchetti spazzatura : " + somma3;
-                        }*/
+                            document.getElementById("p4").innerHTML = "Punteggio totale : " + points;
+                        }
                         comboY = quad;
                         found = true;
                         target = matrix[i][j];
@@ -303,27 +366,39 @@ function controllo() {
 
                     }
                 } else {
-                    /*if(matrix[i][j] == 0){
-                        somma0 += 15
+                    if(matrix[i][j] == 0){
+                        points += 15
                         somma4 += 3
+                        if(somma4>=50){
+                            somma4=50
+                        }
                             document.getElementById("p5").innerHTML = "Bottiglie di vetro per vincere : " + somma4 + "/50"
-                    document.getElementById("p1").innerHTML = "Punteggio bottiglie di vetro : " + somma0;
+                            document.getElementById("p4").innerHTML = "Punteggio totale : " + points;
                     }else if(matrix[i][j] == 1){
-                        somma1 += 6
+                        points += 6
                         somma5 += 3
+                        if(somma5>=50){
+                            somma5=50
+                        }
                             document.getElementById("p6").innerHTML = "Scatole di cartone per vincere : " + somma5 + "/50" 
-                    document.getElementById("p2").innerHTML = "Punteggio scatole di cartone : " + somma1;
+                            document.getElementById("p4").innerHTML = "Punteggio totale : " + points;
                     }else if(matrix[i][j] == 2){
-                        somma2 += 9
+                        points += 9
                         somma6 += 3
+                        if(somma6>=50){
+                            somma6=50
+                        }
                             document.getElementById("p7").innerHTML = "Bottiglie di plastica per vincere : " + somma6 + "/50"
-                    document.getElementById("p3").innerHTML = "Punteggio bottiglie di plastica : " + somma2;
+                            document.getElementById("p4").innerHTML = "Punteggio totale : " + points;
                     }else if(matrix[i][j] == 3){
-                        somma3 += 3
+                        points += 3
                         somma7 += 3
+                        if(somma7>=50){
+                            somma7=50
+                        }
                             document.getElementById("p8").innerHTML = "Sacchetti spazzatura per vincere : " + somma7 + "/50"
-                    document.getElementById("p4").innerHTML = "Punteggio sacchetti spazzatura : " + somma3;
-                    }*/
+                            document.getElementById("p4").innerHTML = "Punteggio totale : " + points;
+                    }
                     comboY = tris;
                     found = true;
                     target = matrix[i][j];
@@ -373,7 +448,20 @@ function controllo() {
             }
         }
         controllo();
+        controlla();
     } else {
         return found;
     }
 }
+
+
+function controlla(){
+    if(somma4 >= 50 && somma5 >= 50 && somma6 >= 50 && somma7 >= 50 ){
+        window.location.href = "classifica.html"
+        
+        document.getElementById("p1").innerHTML = "nome " + points
+
+    }
+}
+
+
