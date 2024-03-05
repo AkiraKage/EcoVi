@@ -5,10 +5,12 @@ let col = parseInt(parsedUrl.searchParams.get('col'));
 console.log("col: " + col);
 
 let matrix;
-let storedmatrix = localStorage.getItem('matrix');
+//let storedmatrix = localStorage.getItem('matrix');
 //if(storedmatrix){
 //    matrix = JSON.parse(storedmatrix);
-//} else {     
+//} else {
+
+//randomizzazione numeri nella matrice
 matrix = [];
 for (let i = 0; i < col; i++) {
     matrix.push([]);
@@ -25,6 +27,7 @@ for (let i = 0; i < col; i++) {
 }
 //}
 
+//primo caricamento immagini
 document.getElementById("contenitore").style.gridTemplateColumns = `repeat(${col}, 1fr)`
 for (let i = 0; i < col; i++) {
     for (let j = 0; j < col; j++) {
@@ -35,7 +38,7 @@ for (let i = 0; i < col; i++) {
 //localStorage.setItem('matrix', JSON.stringify(matrix));
 
 let icons = document.getElementsByClassName('cell');
-let i1, j1, pos1, i2, j2, pos2, click1, click2;
+let i1, j1, pos1, i2, j2, pos2;
 clickcheck();
 
 function clickcheck() {
@@ -46,17 +49,14 @@ function clickcheck() {
             const j = clickedicon.getAttribute('j');
             console.log(i, j);
 
-
-            if (i1 == undefined) {
+            if (i1 == null) {
                 i1 = i;
                 j1 = j;
                 pos1 = `${i1} ${j1}`
-                click1 = y;
                 clickedicon.style.backgroundColor = 'lightblue';
 
-            } else if (i1 != undefined && i2 == undefined) {
+            } else if (i1 != null && i2 == null) {
                 pos2 = `${i} ${j}`
-                click2 = y;
                 if (pos1 != pos2) {
                     i2 = i;
                     j2 = j;
@@ -64,20 +64,20 @@ function clickcheck() {
                         clickedicon.style.backgroundColor = 'lightblue';
                         setTimeout(() => {
                             swap(i1, i2, j1, j2);
-                            i1 = undefined;
-                            i2 = undefined;
-                            j1 = undefined;
-                            j2 = undefined;
+                            i1 = null;
+                            i2 = null;
+                            j1 = null;
+                            j2 = null;
                             controllo();
                             updateGrid();
                             //localStorage.setItem('matrix', JSON.stringify(matrix));
                         }, 350);
                     } else {
                         alert("no");
-                        i1 = undefined;
-                        i2 = undefined;
-                        i2 = undefined;
-                        j2 = undefined;
+                        i1 = null;
+                        i2 = null;
+                        i2 = null;
+                        j2 = null;
                         updateGrid();
                     }
                 }
@@ -97,16 +97,21 @@ function updateGrid() {
     document.getElementById("contenitore").innerHTML = '';
     for (let i = 0; i < col; i++) {
         for (let j = 0; j < col; j++) {
-            if (matrix[i][j] == undefined) {
+            if (matrix[i][j] == null) {
                 let randomIndex;
                 do {
                     randomIndex = Math.floor(Math.random() * 4);
                 } while (
                     (i >= 2 && matrix[i - 1][j] == randomIndex && matrix[i - 2][j] == randomIndex) ||
-                    (j >= 2 && matrix[i][j - 1] == randomIndex && matrix[i][j - 2] == randomIndex)
+                    (i < col - 2 && matrix[i + 1][j] == randomIndex && matrix[i + 2][j] == randomIndex) ||      
+                    (i >= 1 && i < col - 1 && matrix[i - 1][j] == randomIndex && matrix[i + 1][j] == randomIndex) ||              
+                    (j >= 2 && matrix[i][j - 1] == randomIndex && matrix[i][j - 2] == randomIndex) ||
+                    (j < col - 2 && matrix[j + 1][j] == randomIndex && matrix[j + 2][j] == randomIndex) || 
+                    (j >= 1 && j < col - 1 && matrix[i][j - 1] == randomIndex && matrix[i][j + 1] == randomIndex)
                 )
                 matrix[i][j] = randomIndex;
             }
+            controllo();
             document.getElementById("contenitore").innerHTML += `<div class='cell' i='${i}' j='${j}'><img src='${images[matrix[i][j]]}'></div>`
         }
         clickcheck();
@@ -125,6 +130,7 @@ let somma5 = 0
 let somma6 = 0
 let somma7 = 0
 let count = 0
+let points = 0;
 
 
 let found = false;
@@ -132,11 +138,11 @@ function controllo() {
     for (let i = 0; i < col; i++) {
         for (let j = 0; j < col; j++) {
             // controllo sequenze orizzontali
-            if (j >= 2 && matrix[i][j] != undefined && matrix[i][j] == matrix[i][j - 1] && matrix[i][j] == matrix[i][j - 2]) {
+            if (j >= 2 && matrix[i][j] != null && matrix[i][j] == matrix[i][j - 1] && matrix[i][j] == matrix[i][j - 2]) {
                 count += 1
                 if (j <= col - 2 && matrix[i][j + 1] == matrix[i][j]) {
                     if (j <= col - 3 && matrix[i][j + 2] == matrix[i][j]) {
-                        if(matrix[i][j] == 0){
+                        /*if(matrix[i][j] == 0){
                             somma0 += 25
                             somma4 += 5
                             document.getElementById("p5").innerHTML = "Bottiglie di vetro per vincere : " + somma4 + "/50" 
@@ -156,16 +162,16 @@ function controllo() {
                             somma7 += 5
                             document.getElementById("p8").innerHTML = "Sacchetti spazzatura per vincere : " + somma7 + "/50"
                         document.getElementById("p4").innerHTML = "Punteggio sacchetti spazzatura : " + somma3;
-                        }
+                        }*/
                         cinquina += 1;
                         found = true;
-                        matrix[i][j] = undefined;
-                        matrix[i][j - 1] = undefined;
-                        matrix[i][j - 2] = undefined;
-                        matrix[i][j + 1] = undefined;
-                        matrix[i][j + 2] = undefined;
+                        matrix[i][j] = null;
+                        matrix[i][j - 1] = null;
+                        matrix[i][j - 2] = null;
+                        matrix[i][j + 1] = null;
+                        matrix[i][j + 2] = null;
                     } else {
-                        if(matrix[i][j] == 0){
+                        /*if(matrix[i][j] == 0){
                             somma0 += 20
                             somma4 += 4
                             document.getElementById("p5").innerHTML = "Bottiglie di vetro per vincere : " + somma4 + "/50"
@@ -186,16 +192,16 @@ function controllo() {
                             document.getElementById("p8").innerHTML = "Sacchetti spazzatura per vincere : " + somma7 + "/50"
                         document.getElementById("p4").innerHTML = "Punteggio sacchetti spazzatura : " + somma3;
                         }
-                        
+                        */
                         quad += 1;
                         found = true;
-                        matrix[i][j] = undefined;
-                        matrix[i][j - 1] = undefined;
-                        matrix[i][j - 2] = undefined;
-                        matrix[i][j + 1] = undefined;
+                        matrix[i][j] = null;
+                        matrix[i][j - 1] = null;
+                        matrix[i][j - 2] = null;
+                        matrix[i][j + 1] = null;
                     }
                 } else {
-                    if(matrix[i][j] == 0){
+                    /*if(matrix[i][j] == 0){
                         somma0 += 15
                         somma4 += 3
                             document.getElementById("p5").innerHTML = "Bottiglie di vetro per vincere : " + somma4 + "/50"
@@ -215,21 +221,21 @@ function controllo() {
                         somma7 += 3
                             document.getElementById("p8").innerHTML = "Sacchetti spazzatura per vincere : " + somma7 + "/50"
                     document.getElementById("p4").innerHTML = "Punteggio sacchetti spazzatura : " + somma3;
-                    }
+                    }*/
                     tris += 1;
                     found = true;
-                    matrix[i][j] = undefined;
-                    matrix[i][j - 1] = undefined;
-                    matrix[i][j - 2] = undefined;
+                    matrix[i][j] = null;
+                    matrix[i][j - 1] = null;
+                    matrix[i][j - 2] = null;
                 }
             }
 
             // controllo sequenze verticali
-            if (i >= 2 && matrix[i][j] != undefined && matrix[i][j] == matrix[i - 1][j] && matrix[i][j] == matrix[i - 2][j]) {
+            if (i >= 2 && matrix[i][j] != null && matrix[i][j] == matrix[i - 1][j] && matrix[i][j] == matrix[i - 2][j]) {
                 count += 1
                 if (i <= col - 2 && matrix[i + 1][j] == matrix[i][j]) {
                     if (i <= col - 3 && matrix[i + 2][j] == matrix[i][j]) {
-                        if(matrix[i][j] == 0){
+                        /*if(matrix[i][j] == 0){
                             somma0 += 25
                             somma4 += 5
                             document.getElementById("p5").innerHTML = "Bottiglie di vetro per vincere : " + somma4 + "/50"
@@ -249,17 +255,17 @@ function controllo() {
                             somma7 += 5
                             document.getElementById("p8").innerHTML = "Sacchetti spazzatura per vincere : " + somma7 + "/50"
                         document.getElementById("p4").innerHTML = "Punteggio sacchetti spazzatura : " + somma3;
-                        }
+                        }*/
                         cinquina += 1;
                         found = true;
-                        matrix[i][j] = undefined;
-                        matrix[i - 1][j] = undefined;
-                        matrix[i - 2][j] = undefined;
-                        matrix[i + 1][j] = undefined;
-                        matrix[i + 2][j] = undefined;
+                        matrix[i][j] = null;
+                        matrix[i - 1][j] = null;
+                        matrix[i - 2][j] = null;
+                        matrix[i + 1][j] = null;
+                        matrix[i + 2][j] = null;
 
                     } else {
-                        if(matrix[i][j] == 0){
+                        /*if(matrix[i][j] == 0){
                             somma0 += 20
                             somma4 += 4
                             document.getElementById("p5").innerHTML = "Bottiglie di vetro per vincere : " + somma4 + "/50"
@@ -279,17 +285,17 @@ function controllo() {
                             somma7 += 4
                             document.getElementById("p8").innerHTML = "Sacchetti spazzatura per vincere : " + somma7 + "/50"
                         document.getElementById("p4").innerHTML = "Punteggio sacchetti spazzatura : " + somma3;
-                        }
+                        }*/
                         quad += 1;
                         found = true;
-                        matrix[i][j] = undefined;
-                        matrix[i - 1][j] = undefined;
-                        matrix[i - 2][j] = undefined;
-                        matrix[i + 1][j] = undefined;
+                        matrix[i][j] = null;
+                        matrix[i - 1][j] = null;
+                        matrix[i - 2][j] = null;
+                        matrix[i + 1][j] = null;
 
                     }
                 } else {
-                    if(matrix[i][j] == 0){
+                    /*if(matrix[i][j] == 0){
                         somma0 += 15
                         somma4 += 3
                             document.getElementById("p5").innerHTML = "Bottiglie di vetro per vincere : " + somma4 + "/50"
@@ -309,23 +315,23 @@ function controllo() {
                         somma7 += 3
                             document.getElementById("p8").innerHTML = "Sacchetti spazzatura per vincere : " + somma7 + "/50"
                     document.getElementById("p4").innerHTML = "Punteggio sacchetti spazzatura : " + somma3;
-                    }
+                    }*/
                     tris += 1;
                     found = true;
-                    matrix[i][j] = undefined;
-                    matrix[i - 1][j] = undefined;
-                    matrix[i - 2][j] = undefined;
+                    matrix[i][j] = null;
+                    matrix[i - 1][j] = null;
+                    matrix[i - 2][j] = null;
                 }
             }
         }
     }
     //aggiornamento matrice per spostare valori undefined in cima
     console.log('found: ' + found);
-    if(found == true){
+    if(found){
         found = false;
         for(let i = 0; i < col; i++){
             for(let j = 0; j < col; j++){
-                if(matrix[i][j] == undefined){
+                if(matrix[i][j] == null){
                     let n = i;
                     while(n > 0){
                         swap(n, n - 1, j, j)
@@ -339,14 +345,4 @@ function controllo() {
     } else {
         return found;
     }
-    if(count>=1){
-        count = 0
-        controllo();
-        
-
-    }
-
-
 }
-
-console.log(matrix[0][0])
