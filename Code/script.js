@@ -1,6 +1,4 @@
-const images = ['./Img/bottle.png', './Img/box.png', './Img/plastic bottle.png', './Img/garbage.png'];
-const riciclo = './Img/recycle.png';
-const natura = './Img/earth.png';
+const images = ['./Img/bottle.png', './Img/box.png', './Img/plastic bottle.png', './Img/garbage.png', './Img/recycle.png', './Img/earth.png'];
 
 const parsedUrl = new URL(window.location.href);
 let col = parseInt(parsedUrl.searchParams.get('col'));
@@ -56,12 +54,34 @@ function clickcheck() {
                 j1 = j;
                 pos1 = `${i1} ${j1}`
                 clickedicon.style.backgroundColor = 'lightblue';
-
-            } else if (i1 != null && i2 == null) {
+                if(matrix[i1][j1] == 4){
+                    if(j<=3){
+                    matrix[i1][j1+1] = null
+                    }
+                    if(j>=1){     
+                    matrix[i1][j1-1] = null
+                    }
+                    if(i<=3){
+                    matrix[i1+1][j1] = null
+                    }
+                    if(i>=1){
+                    matrix[i1-1][j1] = null
+                    }
+                    matrix[i1][j1] = null
+                    console.log("ciao")
+                }else if(matrix[i1][j1] == "an"){
+                    amore();
+                }
+            } else if (i1 != null && i2 == null) {               
                 pos2 = `${i} ${j}`
-                if (pos1 != pos2) {
+                if (pos1 != pos2) {                   
                     i2 = i;
                     j2 = j;
+                    if(matrix[i2][j2] == "pr"){
+                        riciclo();
+                }else if(matrix[i2][j2] == "an"){
+                    amore();
+            }
                     if ((i1 == i2 && Math.abs(j1 - j2) == 1) || (j1 == j2 && Math.abs(i1 - i2) == 1)) {
                         clickedicon.style.backgroundColor = 'lightblue';
                         setTimeout(() => {
@@ -112,6 +132,10 @@ function updateGrid() {
                     (j >= 1 && j < col - 1 && matrix[i][j - 1] == randomIndex && matrix[i][j + 1] == randomIndex)
                 )
                 matrix[i][j] = randomIndex;
+            }else if(matrix[i][j] == "pr"){
+                matrix[i][j] = 4
+            }else if(matrix[i][j] == "an"){
+                matrix[i][j] = 5
             }
             controllo();
             document.getElementById("contenitore").innerHTML += `<div class='cell' i='${i}' j='${j}'><img src='${images[matrix[i][j]]}'></div>`
@@ -178,7 +202,7 @@ function controllo() {
                         matrix[i][j - 1] = null;
                         matrix[i][j - 2] = null;
                         matrix[i][j + 1] = null;
-                        matrix[i][j + 2] = null;
+                        matrix[i][j + 2] = "an";
                     } else {
                         if (matrix[i][j] == 0) {
                             points += 20
@@ -218,7 +242,7 @@ function controllo() {
                         matrix[i][j] = null;
                         matrix[i][j - 1] = null;
                         matrix[i][j - 2] = null;
-                        matrix[i][j + 1] = null;
+                        matrix[i][j + 1] = "pr";
                     }
                 } else {
                     if (matrix[i][j] == 0) {
@@ -300,7 +324,7 @@ function controllo() {
                         }
 
                         found = true;
-                        matrix[i][j] = null;
+                        matrix[i][j] = "an";
                         matrix[i - 1][j] = null;
                         matrix[i - 2][j] = null;
                         matrix[i + 1][j] = null;
@@ -342,7 +366,7 @@ function controllo() {
                         }
 
                         found = true;
-                        matrix[i][j] = null;
+                        matrix[i][j] = "pr";
                         matrix[i - 1][j] = null;
                         matrix[i - 2][j] = null;
                         matrix[i + 1][j] = null;
@@ -424,4 +448,11 @@ function pointcontrol() {
     }
 }
 
+function riciclo(){
+    matrix[i][j+1] = undefined     
+    matrix[i][j-1] = undefined
+    matrix[i+1][j] = undefined
+    matrix[i-1][j] = undefined
+    matrix[i][j] = undefined
+}
 
