@@ -1,6 +1,6 @@
 const images = ['./Img/bottle.png', './Img/box.png', './Img/plastic bottle.png', './Img/garbage.png'];
 const riciclo = './Img/recycle.png';
-const natura = './Img/recycle.png';
+const natura = './Img/earth.png';
 
 const parsedUrl = new URL(window.location.href);
 let col = parseInt(parsedUrl.searchParams.get('col'));
@@ -72,6 +72,7 @@ function clickcheck() {
                             j2 = null;
                             controllo();
                             updateGrid();
+                            visualPoints();
                             //localStorage.setItem('matrix', JSON.stringify(matrix));
                         }, 350);
                     } else {
@@ -120,18 +121,12 @@ function updateGrid() {
     }
 }
 
-let tris = 0;
-let quad = 0;
-let cinquina = 0;
-/*let somma0 = 0
-let somma1 = 0
-let somma2 = 0
-let somma3 = 0*/
 let papercount = 0
 let glasscount = 0
-let drycount = 0
+let wastecount = 0
 let plasticcount = 0
 let target;
+let targetval;
 let comboX;
 let comboY;
 let count = 0;
@@ -167,9 +162,9 @@ function controllo() {
                             document.getElementById("p8").innerHTML = "Sacchetti spazzatura per vincere : " + somma7 + "/50"
                         document.getElementById("p4").innerHTML = "Punteggio sacchetti spazzatura : " + somma3;
                         }*/
-                        comboX = cinquina;
+                        comboX = 'cinquina';
                         found = true;
-                        target = matrix[i][j];
+                        //target = matrix[i][j];
                         matrix[i][j] = null;
                         matrix[i][j - 1] = null;
                         matrix[i][j - 2] = null;
@@ -198,9 +193,9 @@ function controllo() {
                         document.getElementById("p4").innerHTML = "Punteggio sacchetti spazzatura : " + somma3;
                         }
                         */
-                        comboX = quad;
+                        comboX = 'quad';
                         found = true;
-                        target = matrix[i][j];
+                        //target = matrix[i][j];
                         matrix[i][j] = null;
                         matrix[i][j - 1] = null;
                         matrix[i][j - 2] = null;
@@ -228,9 +223,9 @@ function controllo() {
                             document.getElementById("p8").innerHTML = "Sacchetti spazzatura per vincere : " + somma7 + "/50"
                     document.getElementById("p4").innerHTML = "Punteggio sacchetti spazzatura : " + somma3;
                     }*/
-                    comboX = tris;
+                    comboX = 'tris';
                     found = true;
-                    target = matrix[i][j];
+                    //target = matrix[i][j];
                     matrix[i][j] = null;
                     matrix[i][j - 1] = null;
                     matrix[i][j - 2] = null;
@@ -262,9 +257,9 @@ function controllo() {
                             document.getElementById("p8").innerHTML = "Sacchetti spazzatura per vincere : " + somma7 + "/50"
                         document.getElementById("p4").innerHTML = "Punteggio sacchetti spazzatura : " + somma3;
                         }*/
-                        comboY = cinquina;
+                        //comboY = 'cinquina';
                         found = true;
-                        target = matrix[i][j];
+                        //target = matrix[i][j];
                         matrix[i][j] = null;
                         matrix[i - 1][j] = null;
                         matrix[i - 2][j] = null;
@@ -293,14 +288,13 @@ function controllo() {
                             document.getElementById("p8").innerHTML = "Sacchetti spazzatura per vincere : " + somma7 + "/50"
                         document.getElementById("p4").innerHTML = "Punteggio sacchetti spazzatura : " + somma3;
                         }*/
-                        comboY = quad;
+                        //comboY = 'quad';
                         found = true;
-                        target = matrix[i][j];
+                        //target = matrix[i][j];
                         matrix[i][j] = null;
                         matrix[i - 1][j] = null;
                         matrix[i - 2][j] = null;
                         matrix[i + 1][j] = null;
-
                     }
                 } else {
                     /*if(matrix[i][j] == 0){
@@ -324,38 +318,12 @@ function controllo() {
                             document.getElementById("p8").innerHTML = "Sacchetti spazzatura per vincere : " + somma7 + "/50"
                     document.getElementById("p4").innerHTML = "Punteggio sacchetti spazzatura : " + somma3;
                     }*/
-                    comboY = tris;
-                    found = true;
-                    target = matrix[i][j];
+                    found = true; 
                     matrix[i][j] = null;
                     matrix[i - 1][j] = null;
                     matrix[i - 2][j] = null;
                 }
             }
-            switch(target){
-                //vetro
-                case "0":
-                    target = 5;
-                    break;
-                //carta
-                case "1":
-                    target = 2;
-                    break;
-                //plastica
-                case "2":
-                    target = 3;
-                    break;
-                //secco
-                case "3":
-                    target = 1;
-                    break;
-            }
-            switch(comboX){
-                case "tris":
-                    break;
-            }
-        }
-    }
     //aggiornamento matrice per spostare valori undefined in cima
     console.log('found: ' + found);
     if(found){
@@ -367,7 +335,6 @@ function controllo() {
                     while(n > 0){
                         swap(n, n - 1, j, j)
                         n--;
-
                     }
                 }
             }
@@ -376,4 +343,8 @@ function controllo() {
     } else {
         return found;
     }
+}
+
+function visualPoints(){
+    document.getElementById('')
 }
