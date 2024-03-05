@@ -1,4 +1,6 @@
 const images = ['./Img/bottle.png', './Img/box.png', './Img/plastic bottle.png', './Img/garbage.png'];
+const riciclo = './Img/recycle.png';
+const natura = './Img/recycle.png';
 
 const parsedUrl = new URL(window.location.href);
 let col = parseInt(parsedUrl.searchParams.get('col'));
@@ -121,16 +123,19 @@ function updateGrid() {
 let tris = 0;
 let quad = 0;
 let cinquina = 0;
-let somma0 = 0
+/*let somma0 = 0
 let somma1 = 0
 let somma2 = 0
-let somma3 = 0
-let somma4 = 0
-let somma5 = 0
-let somma6 = 0
-let somma7 = 0
-let count = 0
-let points = 0;
+let somma3 = 0*/
+let papercount = 0
+let glasscount = 0
+let drycount = 0
+let plasticcount = 0
+let target;
+let comboX;
+let comboY;
+let count = 0;
+let totpoints = 0;
 
 
 let found = false;
@@ -139,7 +144,6 @@ function controllo() {
         for (let j = 0; j < col; j++) {
             // controllo sequenze orizzontali
             if (j >= 2 && matrix[i][j] != null && matrix[i][j] == matrix[i][j - 1] && matrix[i][j] == matrix[i][j - 2]) {
-                count += 1
                 if (j <= col - 2 && matrix[i][j + 1] == matrix[i][j]) {
                     if (j <= col - 3 && matrix[i][j + 2] == matrix[i][j]) {
                         /*if(matrix[i][j] == 0){
@@ -163,8 +167,9 @@ function controllo() {
                             document.getElementById("p8").innerHTML = "Sacchetti spazzatura per vincere : " + somma7 + "/50"
                         document.getElementById("p4").innerHTML = "Punteggio sacchetti spazzatura : " + somma3;
                         }*/
-                        cinquina += 1;
+                        comboX = cinquina;
                         found = true;
+                        target = matrix[i][j];
                         matrix[i][j] = null;
                         matrix[i][j - 1] = null;
                         matrix[i][j - 2] = null;
@@ -193,8 +198,9 @@ function controllo() {
                         document.getElementById("p4").innerHTML = "Punteggio sacchetti spazzatura : " + somma3;
                         }
                         */
-                        quad += 1;
+                        comboX = quad;
                         found = true;
+                        target = matrix[i][j];
                         matrix[i][j] = null;
                         matrix[i][j - 1] = null;
                         matrix[i][j - 2] = null;
@@ -222,8 +228,9 @@ function controllo() {
                             document.getElementById("p8").innerHTML = "Sacchetti spazzatura per vincere : " + somma7 + "/50"
                     document.getElementById("p4").innerHTML = "Punteggio sacchetti spazzatura : " + somma3;
                     }*/
-                    tris += 1;
+                    comboX = tris;
                     found = true;
+                    target = matrix[i][j];
                     matrix[i][j] = null;
                     matrix[i][j - 1] = null;
                     matrix[i][j - 2] = null;
@@ -232,7 +239,6 @@ function controllo() {
 
             // controllo sequenze verticali
             if (i >= 2 && matrix[i][j] != null && matrix[i][j] == matrix[i - 1][j] && matrix[i][j] == matrix[i - 2][j]) {
-                count += 1
                 if (i <= col - 2 && matrix[i + 1][j] == matrix[i][j]) {
                     if (i <= col - 3 && matrix[i + 2][j] == matrix[i][j]) {
                         /*if(matrix[i][j] == 0){
@@ -256,8 +262,9 @@ function controllo() {
                             document.getElementById("p8").innerHTML = "Sacchetti spazzatura per vincere : " + somma7 + "/50"
                         document.getElementById("p4").innerHTML = "Punteggio sacchetti spazzatura : " + somma3;
                         }*/
-                        cinquina += 1;
+                        comboY = cinquina;
                         found = true;
+                        target = matrix[i][j];
                         matrix[i][j] = null;
                         matrix[i - 1][j] = null;
                         matrix[i - 2][j] = null;
@@ -286,8 +293,9 @@ function controllo() {
                             document.getElementById("p8").innerHTML = "Sacchetti spazzatura per vincere : " + somma7 + "/50"
                         document.getElementById("p4").innerHTML = "Punteggio sacchetti spazzatura : " + somma3;
                         }*/
-                        quad += 1;
+                        comboY = quad;
                         found = true;
+                        target = matrix[i][j];
                         matrix[i][j] = null;
                         matrix[i - 1][j] = null;
                         matrix[i - 2][j] = null;
@@ -316,12 +324,35 @@ function controllo() {
                             document.getElementById("p8").innerHTML = "Sacchetti spazzatura per vincere : " + somma7 + "/50"
                     document.getElementById("p4").innerHTML = "Punteggio sacchetti spazzatura : " + somma3;
                     }*/
-                    tris += 1;
+                    comboY = tris;
                     found = true;
+                    target = matrix[i][j];
                     matrix[i][j] = null;
                     matrix[i - 1][j] = null;
                     matrix[i - 2][j] = null;
                 }
+            }
+            switch(target){
+                //vetro
+                case "0":
+                    target = 5;
+                    break;
+                //carta
+                case "1":
+                    target = 2;
+                    break;
+                //plastica
+                case "2":
+                    target = 3;
+                    break;
+                //secco
+                case "3":
+                    target = 1;
+                    break;
+            }
+            switch(comboX){
+                case "tris":
+                    break;
             }
         }
     }
