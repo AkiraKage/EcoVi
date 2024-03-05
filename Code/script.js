@@ -1,6 +1,6 @@
 const images = ['./Img/bottle.png', './Img/box.png', './Img/plastic bottle.png', './Img/garbage.png'];
 const riciclo = './Img/recycle.png';
-const natura = './Img/recycle.png';
+const natura = './Img/earth.png';
 
 const parsedUrl = new URL(window.location.href);
 let col = parseInt(parsedUrl.searchParams.get('col'));
