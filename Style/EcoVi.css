@@ -47,18 +47,17 @@ body{
 .centro2{
     padding-top: 4px;
     text-align: center;
-    font-size: 28px;
+    font-size: 36px;
 
 }
 
 .btn{
     text-align: center;
     border: solid 2px black;
-    height: 50px;
-    width: 100px;
+    height: 75px;
+    width: 150px;
     margin: 10px;
-    font-size: 20px;
-    
+    font-size: 28px;
 }
 
 #btndiv {
@@ -92,4 +91,13 @@ body{
     text-align: center;
     margin-left: 800px;
     margin-right: 800px;
+}
+
+.distanziamento3{
+
+    margin-left: 10px;
+    height: 30px;
+    width: 250px;
+    font-size: 24px;
+
 }
