@@ -105,6 +105,10 @@ function clickcheck() {
                             if(count == 0){
                                 swap(temp1, temp2, temp3, temp4)
                                 errore += 1
+                                errorcontrol();
+                                
+                            }else{
+                                errore = 0
                             }
                             count = 0
                             updateGrid();
@@ -489,4 +493,11 @@ function riciclo(i, j) {
 function natura(i, j){
     
     return matrix;
+}
+
+function errorcontrol() {
+    if (errore == 3) {
+        window.location.href = "index.html"
+        errore = 0
+    }
 }
