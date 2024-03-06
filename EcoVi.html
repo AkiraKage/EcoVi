@@ -1,58 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <link rel="stylesheet" href="Style/EcoVi.css">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Gioco</title>
 </head>
+
 <body>
     <div style="position: absolute; margin-top: 200px; margin-left: 700px;" class="hidden" id="divhome">
 
         <form action="index.html" method="get">
-    
-           <div id="btndiv" style="display: inline;">
-    
-              <input class="btn" id="btn1" type="submit" value="Home" style="width: 200px;" disabled>
-    
-           </div>
+
+            <div id="btndiv" style="display: inline;">
+
+                <input class="btn" id="btn1" type="submit" value="Home" style="width: 200px;" disabled>
+
+            </div>
         </form>
-           <div id="btndiv" >
-    
-            <input class="btn" id="btn2" type="submit" value="Riogioca" style="width: 200px;" disabled onclick="ricarica()">
-  
-         </div>
-    
-    
-    
-     </div>
+        <div id="btndiv">
 
-    <div class="grassetto">
+            <input class="btn" id="btn2" type="submit" value="Riogioca" style="width: 200px;" disabled
+                onclick="ricarica()">
 
-   
-    <h1><b>EcoVi: il gioco del riciclo</b></h1>
+        </div>
+
+
+
     </div>
+    <div style="position: absolute; margin-top: 300px; margin-right: 1000px; border: solid; border: 2px;">
+        <div class="distanziamento2">
+            <p id="p4">Punteggio Totale : 0</p>
+
+
+        </div>
+
+
+        <div class="distanziamento2">
+            <p id="p5">Bottiglie di vetro per vincere : 0/50 </p>
+            <p id="p6">Scatole di cartone per vincere : 0/50</p>
+            <p id="p7">Bottiglie di plastica per vincere : 0/50</p>
+            <p id="p8">Sacchetti spazzatura per vincere : 0/50</p>
+
+        </div>
+
+
+
+
+    </div>
+
+
     <div class="centro">
-    <table id="maintab">
-    </table>
-</div>
+    </div>
+    <div style="margin-top: 200px;"></div>
 
-<div id="contenitore"></div>
-
-<div class="distanziamento2">
-    <p id="p4">Punteggio Totale : 0</p>
-    
-
-</div>
+    <div id="contenitore"></div>
 
 
-<div class="distanziamento2">
-    <p id="p5">Bottiglie di vetro per vincere : 0/50 </p>
-    <p id="p6">Scatole di cartone per vincere : 0/50</p>
-    <p id="p7">Bottiglie di plastica per vincere : 0/50</p>
-    <p id="p8">Sacchetti spazzatura per vincere : 0/50</p>
-
-</div>
-<script src="Code/script.js"></script>
+    </div>
+    <script src="Code/script.js"></script>
 </body>
+
 </html>
