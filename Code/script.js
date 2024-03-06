@@ -49,30 +49,27 @@ function clickcheck() {
             const j = clickedicon.getAttribute('j');
             console.log(i, j);
 
-            if (i1 == null) {
+            if (i1 == undefined) {
                 i1 = i;
                 j1 = j;
                 pos1 = `${i1} ${j1}`
                 clickedicon.style.backgroundColor = 'lightblue';
                 if(matrix[i1][j1] == 4){
-                    if(j<=3){
-                    matrix[i1][j1+1] = null
-                    }
-                    if(j>=1){     
-                    matrix[i1][j1-1] = null
-                    }
-                    if(i<=3){
-                    matrix[i1+1][j1] = null
-                    }
-                    if(i>=1){
-                    matrix[i1-1][j1] = null
-                    }
-                    matrix[i1][j1] = null
-                    console.log("ciao")
-                }else if(matrix[i1][j1] == "an"){
+                    riciclo();
+                    i1 = undefined;
+                    i2 = undefined;
+                    j1 = undefined;
+                    j2 = undefined;
+
+                    found = true;
+                    console.log("potere della natura");
+                    controllo();
+                    updateGrid();
+
+                }else if(matrix[i1][j1] == 5){
                     amore();
                 }
-            } else if (i1 != null && i2 == null) {               
+            } else if (i1 != undefined && i2 == undefined) {               
                 pos2 = `${i} ${j}`
                 if (pos1 != pos2) {                   
                     i2 = i;
@@ -86,20 +83,20 @@ function clickcheck() {
                         clickedicon.style.backgroundColor = 'lightblue';
                         setTimeout(() => {
                             swap(i1, i2, j1, j2);
-                            i1 = null;
-                            i2 = null;
-                            j1 = null;
-                            j2 = null;
+                            i1 = undefined;
+                            i2 = undefined;
+                            j1 = undefined;
+                            j2 = undefined;
                             controllo();
                             updateGrid();
                             //localStorage.setItem('matrix', JSON.stringify(matrix));
                         }, 350);
                     } else {
                         alert("no");
-                        i1 = null;
-                        i2 = null;
-                        i2 = null;
-                        j2 = null;
+                        i1 = undefined;
+                        i2 = undefined;
+                        i2 = undefined;
+                        j2 = undefined;
                         updateGrid();
                     }
                 }
@@ -417,7 +414,7 @@ function controllo() {
     }
     //aggiornamento matrice per spostare valori undefined in cima
     console.log('found: ' + found);
-    if (found) {
+    if(found){
         found = false;
         for (let i = 0; i < col; i++) {
             for (let j = 0; j < col; j++) {
@@ -438,7 +435,6 @@ function controllo() {
     }
 }
 
-
 function pointcontrol() {
     if (glasscount >= 50 && papercount >= 50 && plasticcount >= 50 && waste >= 50) {
         window.location.href = "classifica.html"
@@ -449,10 +445,17 @@ function pointcontrol() {
 }
 
 function riciclo(){
-    matrix[i][j+1] = undefined     
-    matrix[i][j-1] = undefined
-    matrix[i+1][j] = undefined
-    matrix[i-1][j] = undefined
-    matrix[i][j] = undefined
+    if(i+1 < col){
+        matrix[i1][j1+1] = 5;
+    }
+    if(i-1 >= 0){
+        matrix[i][j-1] = 5;
+    }
+    if(j+1 < col){
+        matrix[i+1][j] = 5;
+    }
+    if(j-1 >= 0){
+        matrix[i-1][j] = 5;
+    }
+    matrix[i][j] = 5;
 }
-
