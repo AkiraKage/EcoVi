@@ -11,7 +11,7 @@ img {
 .cell {
     border: 3px solid black;
     padding: 5px;
-    margin: 5px;
+    margin: 4px;
     width: 80px;
     height: 77px;
     background-color: azure;
@@ -19,14 +19,14 @@ img {
 
 #contenitore {
     text-align: center;
-    background-color: lightslategrey;
+    background-color: rgb(74, 99, 124);
     display: grid;
     width: fit-content;
-    margin-right: 60px;
+    margin-left: auto;
+    margin-right: auto;
     margin-top: 150px;
     border: 2px solid black;
     border-width: 5px;
-    float: right;
 }
 
 .grassetto {
@@ -74,10 +74,10 @@ img {
 }
 
 .distanziamento2 {
-    font-size: 18px;
-    background-color: gold;
+    font-size: 22px;
+    background-color: whitesmoke;
     text-align: center;
-    width: 300px;
+    width: 400px;
     float: left;
 }
 
@@ -119,4 +119,51 @@ img {
 
 #pointsvis {
     margin-top: 100px;
+}
+
+#divtotale{
+    height: auto;
+    border: solid 3px black;
+    background-color:lightgreen
+}
+
+#errordiv{
+    height: 50px;
+}
+
+.errorvis{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: solid 3px black;
+    margin: 0 5px;
+}
+
+#selectiondiv{
+    width: 50vw; 
+    height: 70vh; 
+    border: solid 5px green;
+    border-radius: 25px;
+    background-color: white; 
+    margin: auto; 
+    margin-top: 10vh;
+}
+
+#divhome {
+    position: absolute;
+    margin-top: 40px;
+    margin-left: 35vw;
+    z-index: 9999;
+}
+
+#perso {
+    display: inline-block;
+    color: black;
+    font-weight: 700;
+    text-align: center;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-size: 90px;
+    text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff,
+               1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
+    height: 150px;
 }

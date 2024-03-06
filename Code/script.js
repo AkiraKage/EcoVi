@@ -1,9 +1,17 @@
 const images = ['./Img/bottle.png', './Img/box.png', './Img/plastic bottle.png', './Img/garbage.png', './Img/recycle.png', './Img/earth.png'];
 
 const parsedUrl = new URL(window.location.href);
+let playername = parsedUrl.searchParams.get('playername');
+console.log(playername);
 let col = parseInt(parsedUrl.searchParams.get('col'));
 console.log("col: " + col);
 
+let saved = []
+let player = {
+    "name" : playername,
+    "points" : 0
+}
+saved.push(player);
 let matrix;
 //let storedmatrix = localStorage.getItem('matrix');
 //if(storedmatrix){
@@ -35,7 +43,7 @@ for (let i = 0; i < col; i++) {
     }
 }
 
-//localStorage.setItem('matrix', JSON.stringify(matrix));
+localStorage.setItem('savedplayer', JSON.stringify(player));
 
 let icons = document.getElementsByClassName('cell');
 let i1, j1, pos1, i2, j2, pos2;
@@ -117,23 +125,25 @@ function clickcheck() {
                             controllo();
                             if (count == 0) {
                                 swap(temp1, temp2, temp3, temp4)
-                                errore += 1
+                                errore += 1;
                                 errorcontrol();
-
                             } else {
-                                errore = 0
+                                errore = 0;
+                                document.getElementById('error1').style.backgroundColor = 'white';
+                                document.getElementById('error2').style.backgroundColor = 'white';
                             }
                             count = 0
                             updateGrid();
-                            //localStorage.setItem('matrix', JSON.stringify(matrix));
                         }, 350);
                     } else {
-                        alert("no");
-                        i1 = undefined;
-                        i2 = undefined;
-                        i2 = undefined;
-                        j2 = undefined;
-                        updateGrid();
+                        clickedicon.style.backgroundColor = 'red';
+                        setTimeout(() => {
+                            i1 = undefined;
+                            i2 = undefined;
+                            i2 = undefined;
+                            j2 = undefined;
+                            updateGrid();
+                        }, 100);
                     }
                 }
             }
@@ -175,6 +185,7 @@ function updateGrid() {
         }
         clickcheck();
     }
+    localStorage.setItem('savedplayer', JSON.stringify(player));
 }
 
 let tris = 0;
@@ -236,7 +247,7 @@ function controllo() {
                             matrix[i][j - 1] = undefined;
                             matrix[i][j - 2] = undefined;
                             matrix[i][j + 1] = undefined;
-                            matrix[i][j + 2] = "an";
+                            matrix[i][j + 2] = 5;
                             count += 1
                         } else {
                             if (matrix[i][j] == 0) {
@@ -277,7 +288,7 @@ function controllo() {
                             matrix[i][j] = undefined;
                             matrix[i][j - 1] = undefined;
                             matrix[i][j - 2] = undefined;
-                            matrix[i][j + 1] = "pr";
+                            matrix[i][j + 1] = 4;
                             count += 1;
                         }
                     } else {
@@ -361,7 +372,7 @@ function controllo() {
                             }
 
                             found = true;
-                            matrix[i][j] = "an";
+                            matrix[i][j] = 5;
                             matrix[i - 1][j] = undefined;
                             matrix[i - 2][j] = undefined;
                             matrix[i + 1][j] = undefined;
@@ -404,7 +415,7 @@ function controllo() {
                             }
 
                             found = true;
-                            matrix[i][j] = "pr";
+                            matrix[i][j] = 4;
                             matrix[i - 1][j] = undefined;
                             matrix[i - 2][j] = undefined;
                             matrix[i + 1][j] = undefined;
@@ -472,6 +483,7 @@ function controllo() {
             }
         }
         controllo();
+        updateGrid();
         pointcontrol();
     } else {
         return found;
@@ -483,12 +495,6 @@ function pointcontrol() {
         window.location.href = "classifica.html"
         document.getElementById("p1").innerHTML = "nome " + points;
     }
-
-    // Aggiungi la classe slideicon alle icone che vengono spostate
-    const movedIcons = document.querySelectorAll('.cell img');
-    movedIcons.forEach(icon => {
-        icon.classList.add('slideicon');
-    })
 }
 
 function riciclo(i, j) {
@@ -506,7 +512,8 @@ function riciclo(i, j) {
     //}
     matrix[i][j] = undefined;
     return matrix;*/
-    
+    i = parseInt(i);
+    j = parseInt(j);
     if (i + 1 < col) {
         points += calcolaPunti(matrix[i + 1][j]);
         matrix[i + 1][j] = undefined;
@@ -524,7 +531,6 @@ function riciclo(i, j) {
         matrix[i][j - 1] = undefined;
     }
 
-    // Aggiungi i punti per la casella attuale e ritorna la matrice modificata
     matrix[i][j] = undefined;
     points += calcolaPunti(matrix[i][j]);
 
@@ -542,6 +548,8 @@ function natura(i, j) {
     matrix[i-1][j+1] = undefined;
     matrix[i-1][j-1] = undefined;
     return matrix;*/
+    i = parseInt(i);
+    j = parseInt(j);
     for (let x = -1; x <= 1; x++) {
         for (let y = -1; y <= 1; y++) {
             if (x != 0 || y != 0) {
@@ -582,11 +590,25 @@ function calcolaPunti(el){
 }
 
 function errorcontrol() {
+    if(errore == 1){
+        document.getElementById('error1').style.backgroundColor = 'red';
+    }
+    if(errore == 2){
+        document.getElementById('error2').style.backgroundColor = 'red';
+    }
     if (errore == 3) {
-        document.getElementById("btn1").removeAttribute("disabled")
-        document.getElementById("divhome").classList.remove("hidden") 
-        document.getElementById("btn2").removeAttribute("disabled")       
-        errore = 0;
+        document.getElementById('error3').style.backgroundColor = 'red';
+        setTimeout(() => {
+            document.getElementById('pointsvis').style.filter = 'blur(4px)';
+            document.getElementById('contenitore').style.filter = 'blur(4px)';
+            document.getElementById("btn1").removeAttribute("disabled")
+            //document.getElementById("btn1").style.filter = 'none';
+            document.getElementById("divhome").classList.remove("hidden");
+            document.getElementById("btn2").removeAttribute("disabled")
+            //document.getElementById("btn2").style.filter = 'none';
+            errore = 0;           
+        }, 1000);
+
     }
 }
 
