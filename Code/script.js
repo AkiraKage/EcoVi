@@ -54,31 +54,41 @@ function clickcheck() {
                 j1 = j;
                 pos1 = `${i1} ${j1}`
                 clickedicon.style.backgroundColor = 'lightblue';
-                if(matrix[i1][j1] == 4){
-                    riciclo();
+                if (matrix[i1][j1] == 4) {
+                    riciclo(i1, j1);
                     i1 = undefined;
-                    i2 = undefined;
                     j1 = undefined;
-                    j2 = undefined;
 
                     found = true;
                     console.log("potere della natura");
                     controllo();
                     updateGrid();
 
-                }else if(matrix[i1][j1] == 5){
-                    amore();
+                } else if (matrix[i1][j1] == 5) {
+                    natura();
                 }
-            } else if (i1 != undefined && i2 == undefined) {               
+
+            } else if (i1 != undefined && i2 == undefined) {
                 pos2 = `${i} ${j}`
-                if (pos1 != pos2) {                   
+                if (pos1 != pos2) {
                     i2 = i;
                     j2 = j;
-                    if(matrix[i2][j2] == "pr"){
-                        riciclo();
-                }else if(matrix[i2][j2] == "an"){
-                    amore();
-            }
+                    if (matrix[i2][j2] == 4) {
+                        riciclo(i2, j2);
+                        i1 = undefined;
+                        j1 = undefined;
+                        i2 = undefined;
+                        j2 = undefined;
+
+                        found = true;
+                        console.log("potere della natura");
+                        controllo();
+                        updateGrid();
+                        return;
+                    } else if (matrix[i1][j1] == 5) {
+                        amore();
+                    }
+
                     if ((i1 == i2 && Math.abs(j1 - j2) == 1) || (j1 == j2 && Math.abs(i1 - i2) == 1)) {
                         clickedicon.style.backgroundColor = 'lightblue';
                         setTimeout(() => {
@@ -129,9 +139,9 @@ function updateGrid() {
                     (j >= 1 && j < col - 1 && matrix[i][j - 1] == randomIndex && matrix[i][j + 1] == randomIndex)
                 )
                 matrix[i][j] = randomIndex;
-            }else if(matrix[i][j] == "pr"){
+            } else if (matrix[i][j] == "pr") {
                 matrix[i][j] = 4
-            }else if(matrix[i][j] == "an"){
+            } else if (matrix[i][j] == "an") {
                 matrix[i][j] = 5
             }
             controllo();
@@ -414,7 +424,7 @@ function controllo() {
     }
     //aggiornamento matrice per spostare valori undefined in cima
     console.log('found: ' + found);
-    if(found){
+    if (found) {
         found = false;
         for (let i = 0; i < col; i++) {
             for (let j = 0; j < col; j++) {
@@ -444,18 +454,19 @@ function pointcontrol() {
     }
 }
 
-function riciclo(){
-    if(i+1 < col){
-        matrix[i1][j1+1] = 5;
+function riciclo(i, j) {
+    if (i + 1 < col) {
+        matrix[i1][j + 1] = 5;
     }
-    if(i-1 >= 0){
-        matrix[i][j-1] = 5;
+    if (i - 1 >= 0) {
+        matrix[i][j - 1] = 5;
     }
-    if(j+1 < col){
-        matrix[i+1][j] = 5;
+    if (j + 1 < col) {
+        matrix[i + 1][j] = 5;
     }
-    if(j-1 >= 0){
-        matrix[i-1][j] = 5;
+    if (j - 1 >= 0) {
+        matrix[i - 1][j] = 5;
     }
     matrix[i][j] = 5;
+    return matrix;
 }
