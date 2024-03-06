@@ -492,7 +492,7 @@ function pointcontrol() {
 }
 
 function riciclo(i, j) {
-    //if (i + 1 < col) {
+    /*//if (i + 1 < col) {
     matrix[i][j + 1] = undefined;
     //}
     //if (i - 1 >= 0) {
@@ -505,20 +505,63 @@ function riciclo(i, j) {
     matrix[i - 1][j] = undefined;
     //}
     matrix[i][j] = undefined;
-    return matrix;
+    return matrix;*/
+    
+    if (i + 1 < col) {
+        points += calcolaPunti(matrix[i + 1][j]);
+        matrix[i + 1][j] = undefined;
+    }
+    if (i - 1 >= 0) {
+        points += calcolaPunti(matrix[i - 1][j]);
+        matrix[i - 1][j] = undefined;
+    }
+    if (j + 1 < col) {
+        points += calcolaPunti(matrix[i][j + 1]);
+        matrix[i][j + 1] = undefined;
+    }
+    if (j - 1 >= 0) {
+        points += calcolaPunti(matrix[i][j - 1]);
+        matrix[i][j - 1] = undefined;
+    }
+
+    // Aggiungi i punti per la casella attuale e ritorna la matrice modificata
+    matrix[i][j] = undefined;
+    points += calcolaPunti(matrix[i][j]);
+
+    return {points, matrix}
 }
 
 function natura(i, j) {
-    matrix[i][j] = undefined;
+    /*matrix[i][j] = undefined;
     matrix[i][j+1] = undefined;
     matrix[i][j-1] = undefined;
-    /*matrix[i+1][j] = undefined;
+    matrix[i+1][j] = undefined;
     matrix[i+1][j+1] = undefined;
-    matrix[i+1][j-1] = undefined;*/
+    matrix[i+1][j-1] = undefined;
     matrix[i-1][j] = undefined;
     matrix[i-1][j+1] = undefined;
     matrix[i-1][j-1] = undefined;
-    return matrix;
+    return matrix;*/
+    for (let x = -1; x <= 1; x++) {
+        for (let y = -1; y <= 1; y++) {
+            if (x != 0 || y != 0) {
+                if (i + x >= 0 && i + x < col && j + y >= 0 && j + y < col && matrix[i + x][j + y] !== undefined) {
+                    points += calcolaPunti(matrix[i + x][j + y]);
+                    matrix[i + x][j + y] = undefined;
+                }
+            }
+        }
+    }
+
+    matrix[i][j] = undefined;
+    return {points, matrix};
+}
+
+function calcolaPunti(el){
+    switch(el){
+        case "0":
+            
+    }
 }
 
 function errorcontrol() {
