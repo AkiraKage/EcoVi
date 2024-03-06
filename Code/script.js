@@ -523,7 +523,13 @@ function natura(i, j) {
 
 function errorcontrol() {
     if (errore == 3) {
-        window.location.href = "index.html"
+        document.getElementById("btn1").removeAttribute("disabled")
+        document.getElementById("divhome").classList.remove("hidden") 
+        document.getElementById("btn2").removeAttribute("disabled")       
         errore = 0
     }
+}
+
+function ricarica(){
+    location.reload()
 }

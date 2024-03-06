@@ -102,11 +102,6 @@ body {
 
 .centro4 {
     margin-top: 25px;
-}
-
-.slideicon{
-    animation: slideDown 1s forwards;
-}
 
 @keyframes slideDown {
     0% {
@@ -116,4 +111,8 @@ body {
     100% {
         transform: translateY(0);
     }
+}
+
+.hidden{
+    display: none;
 }
