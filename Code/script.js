@@ -93,11 +93,20 @@ function clickcheck() {
                         clickedicon.style.backgroundColor = 'lightblue';
                         setTimeout(() => {
                             swap(i1, i2, j1, j2);
+                            let temp1 = i1
+                            let temp2 = i2
+                            let temp3 = j1
+                            let temp4 = j2
                             i1 = undefined;
                             i2 = undefined;
                             j1 = undefined;
                             j2 = undefined;
                             controllo();
+                            if(count == 0){
+                                swap(temp1, temp2, temp3, temp4)
+                                errore += 1
+                            }
+                            count = 0
                             updateGrid();
                             //localStorage.setItem('matrix', JSON.stringify(matrix));
                         }, 350);
@@ -159,6 +168,8 @@ let papercount = 0
 let plasticcount = 0
 let waste = 0
 let points = 0;
+let count = 0
+let errore = 0
 
 
 let found = false;
@@ -210,6 +221,7 @@ function controllo() {
                         matrix[i][j - 2] = undefined;
                         matrix[i][j + 1] = undefined;
                         matrix[i][j + 2] = "an";
+                        count+=1
                     } else {
                         if (matrix[i][j] == 0) {
                             points += 20
@@ -250,6 +262,7 @@ function controllo() {
                         matrix[i][j - 1] = undefined;
                         matrix[i][j - 2] = undefined;
                         matrix[i][j + 1] = "pr";
+                        count+=1
                     }
                 } else {
                     if (matrix[i][j] == 0) {
@@ -289,6 +302,7 @@ function controllo() {
                     matrix[i][j] = undefined;
                     matrix[i][j - 1] = undefined;
                     matrix[i][j - 2] = undefined;
+                    count+=1
                 }
             }
 
@@ -336,6 +350,7 @@ function controllo() {
                         matrix[i - 2][j] = undefined;
                         matrix[i + 1][j] = undefined;
                         matrix[i + 2][j] = undefined;
+                        count+=1
 
                     } else {
                         if (matrix[i][j] == 0) {
@@ -377,6 +392,7 @@ function controllo() {
                         matrix[i - 1][j] = undefined;
                         matrix[i - 2][j] = undefined;
                         matrix[i + 1][j] = undefined;
+                        count+=1
 
                     }
                 } else {
@@ -418,6 +434,7 @@ function controllo() {
                     matrix[i][j] = undefined;
                     matrix[i - 1][j] = undefined;
                     matrix[i - 2][j] = undefined;
+                    count+=1
                 }
             }
         }
