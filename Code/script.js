@@ -86,7 +86,7 @@ function clickcheck() {
                         updateGrid();
                         return;
                     } else if (matrix[i1][j1] == 5) {
-                        amore();
+                        natura();
                     }
 
                     if ((i1 == i2 && Math.abs(j1 - j2) == 1) || (j1 == j2 && Math.abs(i1 - i2) == 1)) {
@@ -126,7 +126,7 @@ function updateGrid() {
     document.getElementById("contenitore").innerHTML = '';
     for (let i = 0; i < col; i++) {
         for (let j = 0; j < col; j++) {
-            if (matrix[i][j] == null) {
+            if (matrix[i][j] == undefined) {
                 let randomIndex;
                 do {
                     randomIndex = Math.floor(Math.random() * 4);
@@ -166,7 +166,7 @@ function controllo() {
     for (let i = 0; i < col; i++) {
         for (let j = 0; j < col; j++) {
             // controllo sequenze orizzontali
-            if (j >= 2 && matrix[i][j] != null && matrix[i][j] == matrix[i][j - 1] && matrix[i][j] == matrix[i][j - 2]) {
+            if (j >= 2 && matrix[i][j] != undefined && matrix[i][j] == matrix[i][j - 1] && matrix[i][j] == matrix[i][j - 2]) {
                 if (j <= col - 2 && matrix[i][j + 1] == matrix[i][j]) {
                     if (j <= col - 3 && matrix[i][j + 2] == matrix[i][j]) {
                         if (matrix[i][j] == 0) {
@@ -205,10 +205,10 @@ function controllo() {
                             document.getElementById("p4").innerHTML = "Punteggio totale : " + points;
                         }
                         found = true;
-                        matrix[i][j] = null;
-                        matrix[i][j - 1] = null;
-                        matrix[i][j - 2] = null;
-                        matrix[i][j + 1] = null;
+                        matrix[i][j] = undefined;
+                        matrix[i][j - 1] = undefined;
+                        matrix[i][j - 2] = undefined;
+                        matrix[i][j + 1] = undefined;
                         matrix[i][j + 2] = "an";
                     } else {
                         if (matrix[i][j] == 0) {
@@ -246,9 +246,9 @@ function controllo() {
                         }
 
                         found = true;
-                        matrix[i][j] = null;
-                        matrix[i][j - 1] = null;
-                        matrix[i][j - 2] = null;
+                        matrix[i][j] = undefined;
+                        matrix[i][j - 1] = undefined;
+                        matrix[i][j - 2] = undefined;
                         matrix[i][j + 1] = "pr";
                     }
                 } else {
@@ -286,14 +286,14 @@ function controllo() {
                         document.getElementById("p4").innerHTML = "Punteggio totale : " + points;
                     }
                     found = true;
-                    matrix[i][j] = null;
-                    matrix[i][j - 1] = null;
-                    matrix[i][j - 2] = null;
+                    matrix[i][j] = undefined;
+                    matrix[i][j - 1] = undefined;
+                    matrix[i][j - 2] = undefined;
                 }
             }
 
             // controllo sequenze verticali
-            if (i >= 2 && matrix[i][j] != null && matrix[i][j] == matrix[i - 1][j] && matrix[i][j] == matrix[i - 2][j]) {
+            if (i >= 2 && matrix[i][j] != undefined && matrix[i][j] == matrix[i - 1][j] && matrix[i][j] == matrix[i - 2][j]) {
                 if (i <= col - 2 && matrix[i + 1][j] == matrix[i][j]) {
                     if (i <= col - 3 && matrix[i + 2][j] == matrix[i][j]) {
                         if (matrix[i][j] == 0) {
@@ -332,10 +332,10 @@ function controllo() {
 
                         found = true;
                         matrix[i][j] = "an";
-                        matrix[i - 1][j] = null;
-                        matrix[i - 2][j] = null;
-                        matrix[i + 1][j] = null;
-                        matrix[i + 2][j] = null;
+                        matrix[i - 1][j] = undefined;
+                        matrix[i - 2][j] = undefined;
+                        matrix[i + 1][j] = undefined;
+                        matrix[i + 2][j] = undefined;
 
                     } else {
                         if (matrix[i][j] == 0) {
@@ -374,9 +374,9 @@ function controllo() {
 
                         found = true;
                         matrix[i][j] = "pr";
-                        matrix[i - 1][j] = null;
-                        matrix[i - 2][j] = null;
-                        matrix[i + 1][j] = null;
+                        matrix[i - 1][j] = undefined;
+                        matrix[i - 2][j] = undefined;
+                        matrix[i + 1][j] = undefined;
 
                     }
                 } else {
@@ -415,9 +415,9 @@ function controllo() {
                     }
 
                     found = true;
-                    matrix[i][j] = null;
-                    matrix[i - 1][j] = null;
-                    matrix[i - 2][j] = null;
+                    matrix[i][j] = undefined;
+                    matrix[i - 1][j] = undefined;
+                    matrix[i - 2][j] = undefined;
                 }
             }
         }
@@ -428,7 +428,7 @@ function controllo() {
         found = false;
         for (let i = 0; i < col; i++) {
             for (let j = 0; j < col; j++) {
-                if (matrix[i][j] == null) {
+                if (matrix[i][j] == undefined) {
                     let n = i;
                     while (n > 0) {
                         swap(n, n - 1, j, j)
@@ -448,25 +448,28 @@ function controllo() {
 function pointcontrol() {
     if (glasscount >= 50 && papercount >= 50 && plasticcount >= 50 && waste >= 50) {
         window.location.href = "classifica.html"
-
-        document.getElementById("p1").innerHTML = "nome " + points
-
+        document.getElementById("p1").innerHTML = "nome " + points;
     }
 }
 
 function riciclo(i, j) {
-    if (i + 1 < col) {
-        matrix[i1][j + 1] = 5;
-    }
-    if (i - 1 >= 0) {
-        matrix[i][j - 1] = 5;
-    }
-    if (j + 1 < col) {
-        matrix[i + 1][j] = 5;
-    }
-    if (j - 1 >= 0) {
-        matrix[i - 1][j] = 5;
-    }
-    matrix[i][j] = 5;
+    //if (i + 1 < col) {
+        matrix[i][j + 1] = undefined;
+    //}
+    //if (i - 1 >= 0) {
+        matrix[i][j - 1] = undefined;
+    //}
+    //if (j + 1 < col) {
+        //matrix[i + 1][j] = undefined;
+    //}
+    //if (j - 1 >= 0) {
+        matrix[i - 1][j] = undefined;
+    //}
+    matrix[i][j] = undefined;
+    return matrix;
+}
+
+function natura(i, j){
+    
     return matrix;
 }
