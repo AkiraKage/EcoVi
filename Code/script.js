@@ -56,16 +56,23 @@ function clickcheck() {
                 clickedicon.style.backgroundColor = 'lightblue';
                 if (matrix[i1][j1] == 4) {
                     riciclo(i1, j1);
+                    console.log("potere del riciclo");
                     i1 = undefined;
                     j1 = undefined;
 
                     found = true;
-                    console.log("potere della natura");
                     controllo();
                     updateGrid();
 
                 } else if (matrix[i1][j1] == 5) {
-                    natura();
+                    natura(i1, j1);
+                    console.log("amore della natura");
+                    i1 = undefined;
+                    j1 = undefined;
+
+                    found = true;
+                    controllo();
+                    updateGrid();
                 }
 
             } else if (i1 != undefined && i2 == undefined) {
@@ -75,20 +82,26 @@ function clickcheck() {
                     j2 = j;
                     if (matrix[i2][j2] == 4) {
                         riciclo(i2, j2);
+                        console.log("potere del riciclo");
                         i1 = undefined;
                         j1 = undefined;
                         i2 = undefined;
                         j2 = undefined;
 
                         found = true;
-                        console.log("potere della natura");
                         controllo();
                         updateGrid();
                         return;
                     } else if (matrix[i1][j1] == 5) {
-                        natura();
+                        natura(i2, j2);
+                        console.log("amore della natura");
+                        i1 = undefined;
+                        j1 = undefined;
+    
+                        found = true;
+                        controllo();
+                        updateGrid();
                     }
-
                     if ((i1 == i2 && Math.abs(j1 - j2) == 1) || (j1 == j2 && Math.abs(i1 - i2) == 1)) {
                         clickedicon.style.backgroundColor = 'lightblue';
                         setTimeout(() => {
@@ -102,12 +115,12 @@ function clickcheck() {
                             j1 = undefined;
                             j2 = undefined;
                             controllo();
-                            if(count == 0){
+                            if (count == 0) {
                                 swap(temp1, temp2, temp3, temp4)
                                 errore += 1
                                 errorcontrol();
-                                
-                            }else{
+
+                            } else {
                                 errore = 0
                             }
                             count = 0
@@ -225,7 +238,7 @@ function controllo() {
                         matrix[i][j - 2] = undefined;
                         matrix[i][j + 1] = undefined;
                         matrix[i][j + 2] = "an";
-                        count+=1
+                        count += 1
                     } else {
                         if (matrix[i][j] == 0) {
                             points += 20
@@ -266,7 +279,7 @@ function controllo() {
                         matrix[i][j - 1] = undefined;
                         matrix[i][j - 2] = undefined;
                         matrix[i][j + 1] = "pr";
-                        count+=1
+                        count += 1
                     }
                 } else {
                     if (matrix[i][j] == 0) {
@@ -306,7 +319,7 @@ function controllo() {
                     matrix[i][j] = undefined;
                     matrix[i][j - 1] = undefined;
                     matrix[i][j - 2] = undefined;
-                    count+=1
+                    count += 1
                 }
             }
 
@@ -354,7 +367,7 @@ function controllo() {
                         matrix[i - 2][j] = undefined;
                         matrix[i + 1][j] = undefined;
                         matrix[i + 2][j] = undefined;
-                        count+=1
+                        count += 1
 
                     } else {
                         if (matrix[i][j] == 0) {
@@ -396,7 +409,7 @@ function controllo() {
                         matrix[i - 1][j] = undefined;
                         matrix[i - 2][j] = undefined;
                         matrix[i + 1][j] = undefined;
-                        count+=1
+                        count += 1
 
                     }
                 } else {
@@ -438,7 +451,7 @@ function controllo() {
                     matrix[i][j] = undefined;
                     matrix[i - 1][j] = undefined;
                     matrix[i - 2][j] = undefined;
-                    count+=1
+                    count += 1
                 }
             }
         }
@@ -454,7 +467,6 @@ function controllo() {
                     while (n > 0) {
                         swap(n, n - 1, j, j)
                         n--;
-
                     }
                 }
             }
@@ -471,27 +483,41 @@ function pointcontrol() {
         window.location.href = "classifica.html"
         document.getElementById("p1").innerHTML = "nome " + points;
     }
+
+    // Aggiungi la classe slideicon alle icone che vengono spostate
+    const movedIcons = document.querySelectorAll('.cell img');
+    movedIcons.forEach(icon => {
+        icon.classList.add('slideicon');
+    })
 }
 
 function riciclo(i, j) {
     //if (i + 1 < col) {
-        matrix[i][j + 1] = undefined;
+    matrix[i][j + 1] = undefined;
     //}
     //if (i - 1 >= 0) {
-        matrix[i][j - 1] = undefined;
+    matrix[i][j - 1] = undefined;
     //}
     //if (j + 1 < col) {
-        //matrix[i + 1][j] = undefined;
+    //matrix[i + 1][j] = undefined;
     //}
     //if (j - 1 >= 0) {
-        matrix[i - 1][j] = undefined;
+    matrix[i - 1][j] = undefined;
     //}
     matrix[i][j] = undefined;
     return matrix;
 }
 
-function natura(i, j){
-    
+function natura(i, j) {
+    matrix[i][j] = undefined;
+    matrix[i][j+1] = undefined;
+    matrix[i][j-1] = undefined;
+    /*matrix[i+1][j] = undefined;
+    matrix[i+1][j+1] = undefined;
+    matrix[i+1][j-1] = undefined;*/
+    matrix[i-1][j] = undefined;
+    matrix[i-1][j+1] = undefined;
+    matrix[i-1][j-1] = undefined;
     return matrix;
 }
 

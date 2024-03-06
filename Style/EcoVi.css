@@ -1,4 +1,4 @@
-img{
+img {
     width: 50px;
     height: 50px;
 }
@@ -10,7 +10,6 @@ img{
     width: 53px;
     height: 50px;
     background-color: azure;
-
 }
 
 #contenitore {
@@ -24,34 +23,27 @@ img{
     border-width: 5px;
 }
 
-.centro{
-
+.centro {
     margin-left: 750px;
-
 }
 
-.grassetto{
-
-  font-size: 28px;
-  margin-top: 10px;
-  text-align: center;
-
-
+.grassetto {
+    font-size: 28px;
+    margin-top: 10px;
+    text-align: center;
 }
 
-body{
-
+body {
     background-color: lightslategray;
 }
 
-.centro2{
+.centro2 {
     padding-top: 4px;
     text-align: center;
     font-size: 36px;
-
 }
 
-.btn{
+.btn {
     text-align: center;
     border: solid 2px black;
     height: 75px;
@@ -66,7 +58,7 @@ body{
     margin-right: auto;
 }
 
-.bottone2{
+.bottone2 {
     margin-left: 100px;
     margin-right: 100px;
     align-items: center;
@@ -75,15 +67,14 @@ body{
     height: 50px;
     width: 100px;
     font-size: 20px;
-
 }
 
-.distanziamento{
+.distanziamento {
     margin-left: 690px;
     padding-top: 175px;
 }
 
-.distanziamento2{   
+.distanziamento2 {
     font-size: 18px;
     background-color: gold;
     text-align: center;
@@ -91,30 +82,38 @@ body{
     margin-right: 800px;
 }
 
-.distanziamento3{
-
+.distanziamento3 {
     margin-left: 10px;
     height: 30px;
     width: 250px;
     font-size: 24px;
-
 }
 
 
-.inline{
-
-
+.inline {
     display: inline;
 }
 
 
-.centro3{
+.centro3 {
     font-size: 24px;
     margin-top: 50px;
 }
 
-.centro4{
+.centro4 {
     margin-top: 25px;
+}
 
+.slideicon{
+    animation: slideDown 1s forwards;
+}
 
+@keyframes slideDown {
+    0% {
+        transform: translateY(-100%);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
 }
