@@ -1,6 +1,5 @@
 body {
     background-color: lightslategray;
-    overflow: hidden;
 }
 
 img {
@@ -24,7 +23,7 @@ img {
     width: fit-content;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 150px;
+    margin-top: 13%;/*150px*/
     border: 2px solid black;
     border-width: 5px;
 }
@@ -58,8 +57,8 @@ img {
 }
 
 .bottone2 {
-    margin-left: 100px;
-    margin-right: 100px;
+    margin-left: 5%;/*100px*/
+    margin-right: 5%;
     align-items: center;
     text-align: center;
     border: solid 2px black;
@@ -69,8 +68,8 @@ img {
 }
 
 .distanziamento {
-    margin-left: 690px;
-    padding-top: 175px;
+    margin-left: 35%;/*690px*/
+    padding-top: 16%;/*175px*/
 }
 
 .distanziamento2 {
@@ -91,7 +90,7 @@ img {
 
 .inline {
     display: inline;
-    margin-left: 725px;
+    margin-left: 38%;/*725px*/
 }
 
 .inline2{
@@ -122,7 +121,7 @@ img {
 }
 
 #pointsvis {
-    margin-top: 100px;
+    margin-top: 10%;/*100px*/
 }
 
 #divtotale{
