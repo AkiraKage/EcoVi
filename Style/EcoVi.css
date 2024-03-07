@@ -97,19 +97,23 @@ img {
 .inline {
     display: inline;
     margin-left: 38%;/*725px*/
+    width: 50px;
+    text-align: right;
 }
 
 .inline2{
     margin-left: 100px;
+    width: 150px;
+    text-align: left;
 }
 
 .centro3 {
     font-size: 24px;
-    margin-top: 50px;
 }
 
 .centro4 {
-    margin-top: 25px;
+    display: flex;
+    align-items: center;
 }
 
 @keyframes slideDown {
@@ -201,4 +205,18 @@ img {
     font-size: 22px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     margin: 16px;
+}
+
+.rankvis{
+    display: inline-block;
+}
+
+#namesrank{
+    margin-left: 30vw;
+    float: left;
+}
+
+#pointsrank{
+    margin-right: 30vw;
+    float: right;
 }
