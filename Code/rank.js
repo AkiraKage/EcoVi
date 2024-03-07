@@ -25,6 +25,10 @@ if (saved) {
             document.getElementById(`p${i + 1}`).innerHTML = "Non registrato";
         }
     }
+} else {
+    for (let i = 0; i < 5; i++) {
+        document.getElementById(`p${i + 1}`).innerHTML = "Non registrato";
+    }
 }
 
 function swap(a, b) {
