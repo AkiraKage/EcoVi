@@ -222,6 +222,12 @@ let waste = 0;
 let points = player.points;
 let count = 0;
 let errore = 0;
+let dialogcount = 0
+let dialoghi =["Consiglio: Attenzione a non fare tre mosse sbagliate <br>di fila, altrimenti perderai",
+"Consiglio: Facendo una sequenza di quattro rifiuti uguali <br> genererai un potere del riciclo, usalo saggiamente",
+"Consiglio: Facendo una sequenza di cinque rifiuti uguali <br> genererai l'amore della natura, che è il potere più forte",
+"Consiglio: Cliccare un amore della natura(🌍) farà esplodere <br> tutte le celle che lo circondano",
+"Consiglio: Cliccare un potere del riciclo(♻️) farà esplodere <br> tutte le caselle adiacenti a croce" ]
 
 
 let found = false;
@@ -233,6 +239,7 @@ function controllo() {
                 if (j >= 2 && matrix[i][j] != undefined && matrix[i][j] == matrix[i][j - 1] && matrix[i][j] == matrix[i][j - 2]) {
                     if (j <= col - 2 && matrix[i][j + 1] == matrix[i][j]) {
                         if (j <= col - 3 && matrix[i][j + 2] == matrix[i][j]) {
+                            dialogcount+=1;
                             if (matrix[i][j] == 0) {
                                 points += 25;
                                 glasscount += 5;
@@ -266,6 +273,7 @@ function controllo() {
                             matrix[i][j + 2] = 5;
                             count += 1
                         } else {
+                            dialogcount+=1;
                             if (matrix[i][j] == 0) {
                                 points += 20;
                                 glasscount += 4;
@@ -300,6 +308,7 @@ function controllo() {
                             count += 1;
                         }
                     } else {
+                        dialogcount+=1;
                         if (matrix[i][j] == 0) {
                             points += 15;
                             glasscount += 3;
@@ -337,6 +346,7 @@ function controllo() {
                 if (i >= 2 && matrix[i][j] != undefined && matrix[i][j] == matrix[i - 1][j] && matrix[i][j] == matrix[i - 2][j]) {
                     if (i <= col - 2 && matrix[i + 1][j] == matrix[i][j]) {
                         if (i <= col - 3 && matrix[i + 2][j] == matrix[i][j]) {
+                            dialogcount+=1;
                             if (matrix[i][j] == 0) {
                                 points += 25;
                                 glasscount += 5;
@@ -372,6 +382,7 @@ function controllo() {
                             count += 1;
 
                         } else {
+                            dialogcount+=1;
                             if (matrix[i][j] == 0) {
                                 points += 20;
                                 glasscount += 4;
@@ -406,6 +417,7 @@ function controllo() {
                             count += 1;
                         }
                     } else {
+                        dialogcount+=1;
                         if (matrix[i][j] == 0) {
                             points += 15;
                             glasscount += 3;
@@ -458,6 +470,11 @@ function controllo() {
                     }
                 }
             }
+        }
+        if(dialogcount>=7){
+            let a = Math.floor(Math.random() * dialoghi.length)
+            document.getElementById("dialog").innerHTML = dialoghi[a];
+            dialogcount = 0
         }
         controllo();
         updateGrid();
@@ -587,3 +604,4 @@ function errorcontrol() {
 function ricarica(){
     location.reload();
 }
+
