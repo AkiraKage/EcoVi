@@ -1,5 +1,6 @@
 let saved = localStorage.getItem('savedplayers');
 let savedPlayers;
+
 if (saved) {
     savedPlayers = JSON.parse(saved);
     console.log(savedPlayers);
@@ -7,7 +8,7 @@ if (saved) {
     for (let i = 0; i < savedPlayers.length; i++) {
         let min = i;
         for (let j = i + 1; j < savedPlayers.length; j++) {
-            if (savedPlayers[j].points < savedPlayers[min].points) {
+            if (savedPlayers[j].points > savedPlayers[min].points) {
                 min = j;
             }
         }
@@ -18,7 +19,7 @@ if (saved) {
 
     for (let i = 0; i < 5; i++) {
         let player = savedPlayers[i];
-        if(player != undefined){
+        if (player != undefined) {
             document.getElementById(`p${i + 1}`).innerHTML = `${player.name}`;
             document.getElementById(`pp${i + 1}`).innerHTML = `Punti: ${player.points}`;
         } else {
