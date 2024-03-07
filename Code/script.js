@@ -11,15 +11,35 @@ let player = {
     "name" : playername,
     "points" : 0
 }
-saved.push(player);
-let matrix;
-//let storedmatrix = localStorage.getItem('matrix');
-//if(storedmatrix){
-//    matrix = JSON.parse(storedmatrix);
-//} else {
+let saveindex;
+
+let stored = localStorage.getItem('savedplayers');
+if (stored) {
+    saved = JSON.parse(stored);
+    for (let i = 0; i < saved.length; i++) {
+        if (saved[i].name == playername) {
+            saveindex = i;
+        }
+    }
+    if (saveindex == undefined) {
+        saved.push(player);
+        saveindex = saved.length - 1;
+    }
+} else {
+    saved.push(player);
+    saveindex = saved.length - 1;
+    localStorage.setItem('savedplayers', JSON.stringify(saved));
+}
+
+function updatePoints(){
+    if(points > saved[saveindex].points){
+        saved[saveindex].points = points;
+        localStorage.setItem('savedplayers', JSON.stringify(saved));
+    }
+}
 
 //randomizzazione numeri nella matrice
-matrix = [];
+let matrix = [];
 for (let i = 0; i < col; i++) {
     matrix.push([]);
     for (let j = 0; j < col; j++) {
@@ -33,7 +53,7 @@ for (let i = 0; i < col; i++) {
         matrix[i].push(randomIndex);
     }
 }
-//}
+
 
 //primo caricamento immagini
 document.getElementById("contenitore").style.gridTemplateColumns = `repeat(${col}, 1fr)`
@@ -43,7 +63,6 @@ for (let i = 0; i < col; i++) {
     }
 }
 
-localStorage.setItem('savedplayer', JSON.stringify(player));
 
 let icons = document.getElementsByClassName('cell');
 let i1, j1, pos1, i2, j2, pos2;
@@ -185,7 +204,7 @@ function updateGrid() {
         }
         clickcheck();
     }
-    localStorage.setItem('savedplayer', JSON.stringify(player));
+    updatePoints();
 }
 
 let tris = 0;
@@ -195,7 +214,7 @@ let glasscount = 0
 let papercount = 0
 let plasticcount = 0
 let waste = 0
-let points = 0;
+let points = player.points;
 let count = 0
 let errore = 0
 
@@ -467,6 +486,7 @@ function controllo() {
             }
         }
     }
+    updatePoints();
     //aggiornamento matrice per spostare valori undefined in cima
     console.log('found: ' + found);
     if (found) {
@@ -498,41 +518,33 @@ function pointcontrol() {
 }
 
 function riciclo(i, j) {
-    /*//if (i + 1 < col) {
-    matrix[i][j + 1] = undefined;
-    //}
-    //if (i - 1 >= 0) {
-    matrix[i][j - 1] = undefined;
-    //}
-    //if (j + 1 < col) {
-    //matrix[i + 1][j] = undefined;
-    //}
-    //if (j - 1 >= 0) {
-    matrix[i - 1][j] = undefined;
-    //}
-    matrix[i][j] = undefined;
-    return matrix;*/
     i = parseInt(i);
     j = parseInt(j);
     if (i + 1 < col) {
         points += calcolaPunti(matrix[i + 1][j]);
+        console.log(calcolaPunti(matrix[i + 1][j]));
         matrix[i + 1][j] = undefined;
     }
     if (i - 1 >= 0) {
         points += calcolaPunti(matrix[i - 1][j]);
+        console.log(calcolaPunti(matrix[i - 1][j]));
         matrix[i - 1][j] = undefined;
     }
     if (j + 1 < col) {
         points += calcolaPunti(matrix[i][j + 1]);
+        console.log(calcolaPunti(matrix[i][j + 1]));
         matrix[i][j + 1] = undefined;
     }
     if (j - 1 >= 0) {
         points += calcolaPunti(matrix[i][j - 1]);
+        console.log(calcolaPunti(matrix[i][j - 1]));
         matrix[i][j - 1] = undefined;
     }
 
     matrix[i][j] = undefined;
     points += calcolaPunti(matrix[i][j]);
+    console.log(calcolaPunti(matrix[i][j]));
+    updatePoints();
 
     return {points, matrix}
 }
@@ -560,30 +572,32 @@ function natura(i, j) {
             }
         }
     }
+    updatePoints();
 
     matrix[i][j] = undefined;
     return {points, matrix};
 }
 
 function calcolaPunti(el){
+    console.log('el'+el)
     let temppoints = 0;
     switch(el){
         //vetro 0, carta 1, plastica 2, secco 3 (pos)
         //vetro 5, carta 2, plastica 3, secco 1 (punti)
-        case "0":
-            temppoints += 5;
+        case 0:
+            temppoints = 5;
             break;
-        case "1":
-            temppoints += 2;
+        case 1:
+            temppoints = 2;
             break;
-        case "2":
-            temppoints += 3;
+        case 2:
+            temppoints = 3;
             break;
-        case "3":
-            temppoints += 1;
+        case 3:
+            temppoints = 1;
             break;
-        case "4"||"5":
-            temppoints += 0;
+        case 4||5||undefined:
+            temppoints = 0;
             break;
     }
     return temppoints;
@@ -599,6 +613,7 @@ function errorcontrol() {
     if (errore == 3) {
         document.getElementById('error3').style.backgroundColor = 'red';
         setTimeout(() => {
+            updatePoints();
             document.getElementById('pointsvis').style.filter = 'blur(4px)';
             document.getElementById('contenitore').style.filter = 'blur(4px)';
             document.getElementById("btn1").removeAttribute("disabled")
@@ -613,5 +628,5 @@ function errorcontrol() {
 }
 
 function ricarica(){
-    location.reload()
+    location.reload();
 }
